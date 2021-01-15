@@ -1,4 +1,3 @@
-#include <mlx.h>
 #include <stdio.h>
 #include <math.h>
 
@@ -49,7 +48,7 @@ t_vector		v_mul(t_vector v1, t_vector v2)
 	return (r);
 }
 
-t_vector		n_mul(t_vector v, int n)
+t_vector		n_mul(t_vector v, double n)
 {
 	t_vector	r;
 
@@ -59,7 +58,7 @@ t_vector		n_mul(t_vector v, int n)
 	return (r);
 }
 
-t_vector		n_div(t_vector v, int n)
+t_vector		n_div(t_vector v, double n)
 {
 	t_vector	r;
 
@@ -85,6 +84,15 @@ t_vector		v_cross(t_vector v1, t_vector v2)
 	r.y = v1.z * v2.x - v1.x * v2.z;
 	r.z = v1.x * v2.y - v1.y * v2.x;
 	return (r);
+}
+
+t_vector		v_unit(t_vector v)
+{
+	double	length;
+
+	length = pow(v.x, 2) + pow(v.y, 2) + pow(v.z, 2);
+	length = sqrt(length);
+	return (n_div(v, length));
 }
 
 int				main(void)
