@@ -1,7 +1,7 @@
 NAME = minirt
 
 all :
-	gcc ./src/*.c ./src/*/*.c -o $(NAME) -I./include -lm
+	gcc ./src/*.c ./src/*/*.c ./src/*/*/*.c -o $(NAME) -I./include -lm
 
 clean :
 	rm -rf $(NAME)
