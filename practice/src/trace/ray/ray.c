@@ -31,14 +31,19 @@ t_point3	ray_at(t_ray *ray, double t)
 }
 
 /*	Returns the color value of the pixel finally obtained by the ray.	*/
-t_color3	ray_color(t_ray *ray)
+t_color3	ray_color(t_ray *ray, t_sphere *sphere)
 {
 	double	t;
 
+	if (hit_sphere(sphere, ray))
+		return (color3(0.5, 0, 0.5));
+	else
+	{
 	/* Coefficient to give gradient based on ray->dir.y value.	*/
 	/* Set the range of t value from 0 to 1.	*/
-	t = 0.5 * (ray->dir.y + 1.0);
+		t = 0.5 * (ray->dir.y + 1.0);
 	/*	((1 - t) * white) + (t * blue)	*/
 	/*	parametric function	*/
-	return (vplus(vmult(color3(1, 1, 1), 1.0 - t), vmult(color3(0.5, 0.7, 1.0), t)));
+		return (vplus(vmult(color3(1, 1, 1), 1.0 - t), vmult(color3(0.5, 0.7, 1.0), t)));
+	}
 }
