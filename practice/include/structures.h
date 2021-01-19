@@ -2,14 +2,22 @@
 # define STRUCTURES_H
 
 /*	common structure	*/
-typedef struct	s_vec3 t_vec3;
-typedef struct	s_vec3 t_point3;
-typedef struct	s_vec3 t_color3;
-typedef struct	s_ray t_ray;
+typedef struct	s_vec3	t_vec3;
+typedef struct	s_vec3	t_point3;
+typedef struct	s_vec3	t_color3;
+typedef struct	s_ray	t_ray;
 
 /*	scene structure	*/
-typedef struct	s_camera t_camera;
-typedef struct	s_canvas t_canvas;
+typedef struct	s_camera	t_camera;
+typedef struct	s_canvas	t_canvas;
+
+/*	object structure	*/
+typedef struct	s_sphere	t_sphere;	
+
+/*	identifier	macro	*/
+typedef int	t_bool;
+# define FALSE 0
+# define TRUE 1
 
 /*	common structure	*/
 struct	s_vec3
@@ -42,6 +50,14 @@ struct	s_canvas
 	int		width;			/*	canvas width	*/
 	int		height;			/*	canvas height	*/
 	double	aspect_ratio;	/*	aspect ratio(width and height ratio)	*/
+};
+
+/*	object structure	*/
+struct	s_sphere
+{
+	t_point3	center;
+	double		radius;
+	double		radius2;
 };
 
 #endif
