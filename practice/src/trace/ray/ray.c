@@ -34,9 +34,17 @@ t_point3	ray_at(t_ray *ray, double t)
 t_color3	ray_color(t_ray *ray, t_sphere *sphere)
 {
 	double	t;
+	t_vec3	n;
 
-	if (hit_sphere(sphere, ray))
-		return (color3(0.5, 0, 0.5));
+	/* If ray hits the sphere
+	   (If the ray and sphere have an intersection
+	   and the intersection is in front of the camera)	*/
+	t = hit_sphere(sphere,ray);
+	if (t > 0.0)
+	{
+		n = vunit(vminus(ray_at(ray, t), sphere->center));
+		return (vmult(color3(n.x + 1, n.y + 1, n.z + 1), 0.5));
+	}
 	else
 	{
 	/* Coefficient to give gradient based on ray->dir.y value.	*/
