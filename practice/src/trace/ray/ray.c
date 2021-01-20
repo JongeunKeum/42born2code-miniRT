@@ -33,18 +33,16 @@ t_point3	ray_at(t_ray *ray, double t)
 /*	Returns the color value of the pixel finally obtained by the ray.	*/
 t_color3	ray_color(t_ray *ray, t_sphere *sphere)
 {
-	double	t;
-	t_vec3	n;
+	double			t;
+	t_hit_record	rec;
 
+	rec.tmin = 0;
+	rec.tmax = INFINITY;
 	/* If ray hits the sphere
 	   (If the ray and sphere have an intersection
 	   and the intersection is in front of the camera)	*/
-	t = hit_sphere(sphere,ray);
-	if (t > 0.0)
-	{
-		n = vunit(vminus(ray_at(ray, t), sphere->center));
-		return (vmult(color3(n.x + 1, n.y + 1, n.z + 1), 0.5));
-	}
+	if (hit_sphere(sphere, ray, &rec))
+		return (vmult(vplus(rec.normal, color3(1, 1, 1)), 0.5));
 	else
 	{
 	/* Coefficient to give gradient based on ray->dir.y value.	*/

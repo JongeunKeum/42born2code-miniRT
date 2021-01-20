@@ -1,22 +1,42 @@
 #include "structures.h"
 #include "utils.h"
+#include "trace.h"
 
-double	hit_sphere(t_sphere *sp, t_ray *ray)
+double	hit_sphere(t_sphere *sp, t_ray *ray, t_hit_record *rec)
 {
 	t_vec3	oc;
 	double	a;
-	double	b;
+	double	half_b;
 	double	c;
 	double	discriminant;
+	double	sqrtd;
+	double	root;
 
 	oc = vminus(ray->orig, sp->center);
-	a = vdot(ray->dir, ray->dir);
-	b = 2.0 * vdot(oc, ray->dir);
-	c = vdot(oc, oc) - sp->radius2;
-	discriminant = b * b - 4 * a * c;
+	a = vdot(ray->dir, ray->dir);	/*	vlength2(ray->dir);	*/
+	half_b = vdot(oc, ray->dir);	/*	Formula for even roots	*/
+	c = vdot(oc, oc) - sp->radius2;	/*	vlength2(oc) - sp->radius2;	*/
+	discriminant = half_b * half_b - a * c;
 	if (discriminant < 0)
-		return (-1.0);
-	else
-		return ((-b - sqrt(discriminant)) / (2.0 * a));
-		/*	The smaller of the two	*/
+		return (FALSE);
+	sqrtd = sqrt(discriminant);
+	/*	Checks whether there is a root
+		between tmin and tmax among two real roots(t),
+		and checks the smaller root first	*/
+	root = (-half_b - sqrtd) / a;
+	if (root < rec->tmin || rec->tmax < root)
+	{
+		root = (-half_b + sqrtd) / a;
+		if (root < rec->tmin || rec->tmax < root)
+			return (FALSE);
+	}
+	rec->t = root;
+	rec->p = ray_at(ray, root);
+	/*	normalized normal vector	*/
+	rec->normal = vdivide(vminus(rec->p, sp->center), sp->radius);
+	/*	The normal vector of rec and the direction vector of the ray
+		are compared and stored as t_bool value,
+		whether it is the front or the back.	*/
+	set_face_normal(ray, rec);
+	return (TRUE);
 }
