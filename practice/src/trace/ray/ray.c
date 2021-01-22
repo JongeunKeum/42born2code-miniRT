@@ -31,7 +31,7 @@ t_point3	ray_at(t_ray *ray, double t)
 }
 
 /*	Returns the color value of the pixel finally obtained by the ray.	*/
-t_color3	ray_color(t_ray *ray, t_sphere *sphere)
+t_color3	ray_color(t_ray *ray, t_object *world)
 {
 	double			t;
 	t_hit_record	rec;
@@ -41,7 +41,7 @@ t_color3	ray_color(t_ray *ray, t_sphere *sphere)
 	/* If ray hits the sphere
 	   (If the ray and sphere have an intersection
 	   and the intersection is in front of the camera)	*/
-	if (hit_sphere(sphere, ray, &rec))
+	if (hit(world, ray, &rec))
 		return (vmult(vplus(rec.normal, color3(1, 1, 1)), 0.5));
 	else
 	{
