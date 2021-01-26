@@ -1,7 +1,7 @@
 #include "trace.h"
 
 /*	ray constructor	*/
-t_ray	ray(t_point3 orig, t_vec3 dir)
+t_ray		ray(t_point3 orig, t_vec3 dir)
 {
 	t_ray	ray;
 
@@ -11,7 +11,7 @@ t_ray	ray(t_point3 orig, t_vec3 dir)
 }
 
 /*	primary ray constructor	*/
-t_ray	ray_primary(t_camera *cam, double u, double v)
+t_ray		ray_primary(t_camera *cam, double u, double v)
 {
 	t_ray	ray;
 
@@ -22,7 +22,7 @@ t_ray	ray_primary(t_camera *cam, double u, double v)
 }
 
 /*	A point separated by the ray(direction vector) 'dir * t' from the ray origin point.	*/
-t_point3	ray_at(t_ray *ray, double t)
+t_point3		ray_at(t_ray *ray, double t)
 {
 	t_point3	at;
 
@@ -30,24 +30,31 @@ t_point3	ray_at(t_ray *ray, double t)
 	return (at);
 }
 
+t_hit_record	record_init(void)
+{
+	t_hit_record	record;
+
+	record.tmin = EPSILON;
+	record.tmax = INFINITY;
+	return (record);
+}
+
 /*	Returns the color value of the pixel finally obtained by the ray.	*/
-t_color3	ray_color(t_ray *ray, t_object *world)
+t_color3		ray_color(t_scene *scene)
 {
 	double			t;
-	t_hit_record	rec;
 
-	rec.tmin = 0;
-	rec.tmax = INFINITY;
+	scene->rec = record_init();
 	/* If ray hits the sphere
 	   (If the ray and sphere have an intersection
 	   and the intersection is in front of the camera)	*/
-	if (hit(world, ray, &rec))
-		return (vmult(vplus(rec.normal, color3(1, 1, 1)), 0.5));
+	if (hit(scene->world, &scene->ray, &scene->rec))
+		return (vmult(vplus(scene->rec.normal, color3(1, 1, 1)), 0.5));
 	else
 	{
 	/* Coefficient to give gradient based on ray->dir.y value.	*/
 	/* Set the range of t value from 0 to 1.	*/
-		t = 0.5 * (ray->dir.y + 1.0);
+		t = 0.5 * (scene->ray.dir.y + 1.0);
 	/*	((1 - t) * white) + (t * blue)	*/
 	/*	parametric function	*/
 		return (vplus(vmult(color3(1, 1, 1), 1.0 - t), vmult(color3(0.5, 0.7, 1.0), t)));
