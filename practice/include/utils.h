@@ -26,6 +26,5 @@ t_vec3		vunit(t_vec3 vec);
 
 /*	object utility	*/
 void		oadd(t_object **list, t_object *new);
-t_object	*olast(t_object *list);
 
 #endif

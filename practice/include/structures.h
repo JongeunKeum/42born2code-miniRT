@@ -11,10 +11,12 @@ typedef struct	s_hit_record	t_hit_record;
 /*	scene structure	*/
 typedef struct	s_camera		t_camera;
 typedef struct	s_canvas		t_canvas;
+typedef	struct	s_scene			t_scene;
 
 /*	object structure	*/
 typedef struct	s_sphere		t_sphere;	
 typedef struct	s_object		t_object;
+typedef	struct	s_light			t_light;
 
 /*	identifier	macro	*/
 typedef int						t_bool;
@@ -23,6 +25,10 @@ typedef int						t_bool;
 
 typedef int						t_object_type;
 # define SP 0
+# define LIGHT_POINT 1
+
+/*	A very small value	*/
+# define EPSILON 1e-6
 
 /*	common structure	*/
 struct	s_vec3
@@ -67,6 +73,16 @@ struct	s_canvas
 	double	aspect_ratio;	/*	aspect ratio(width and height ratio)	*/
 };
 
+struct	s_scene
+{
+	t_canvas		canvas;
+	t_camera		camera;
+	t_object		*world;
+	t_object		*light;
+	t_ray			ray;
+	t_hit_record	rec;
+};
+
 /*	object structure	*/
 struct	s_sphere
 {
@@ -80,6 +96,13 @@ struct	s_object
 	t_object_type	type;
 	void			*element;
 	void			*next;
+};
+
+struct	s_light
+{
+	t_point3	origin;
+	t_color3	light_color;
+	double		bright_ratio;
 };
 
 #endif
