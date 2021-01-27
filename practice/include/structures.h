@@ -30,6 +30,9 @@ typedef int						t_object_type;
 /*	A very small value	*/
 # define EPSILON 1e-6
 
+/*	unit of Luminous Flux	*/
+# define LUMEN 3
+
 /*	common structure	*/
 struct	s_vec3
 {
@@ -52,6 +55,7 @@ struct	s_hit_record
 	double		tmax;
 	double		t;
 	t_bool		front_face;
+	t_color3	albedo;
 };
 
 /*	scene structure	*/
@@ -96,6 +100,7 @@ struct	s_object
 	t_object_type	type;
 	void			*element;
 	void			*next;
+	t_color3		albedo;
 };
 
 struct	s_light
