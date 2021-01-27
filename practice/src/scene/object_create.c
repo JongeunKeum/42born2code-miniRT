@@ -12,7 +12,7 @@ t_sphere	*sphere(t_point3 center, double radius)
 	return (sp);
 }
 
-t_object	*object(t_object_type type, void *element)
+t_object	*object(t_object_type type, void *element, t_color3 albedo)
 {
 	t_object	*new;
 
@@ -21,6 +21,7 @@ t_object	*object(t_object_type type, void *element)
 	new->type = type;
 	new->element = element;
 	new->next = NULL;
+	new->albedo = albedo;
 	return (new);
 }
 

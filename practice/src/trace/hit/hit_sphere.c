@@ -43,5 +43,6 @@ double	hit_sphere(t_object *sp_obj, t_ray *ray, t_hit_record *rec)
 		are compared and stored as t_bool value,
 		whether it is the front or the back.	*/
 	set_face_normal(ray, rec);
+	rec->albedo = sp_obj->albedo;
 	return (TRUE);
 }

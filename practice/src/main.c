@@ -18,11 +18,14 @@ t_scene	*scene_init(void)
 	scene->canvas = canvas(400, 300);
 	scene->camera = camera(&scene->canvas, point3(0, 0, 0));
 	/*	add SP1 in the world	*/
-	world = object(SP, sphere(point3(-2, 0, -5), 2));
+	world = object(SP, sphere(point3(-2, 0, -5), 2), color3(0.5, 0, 0));
 	/*	add SP2 in the world	*/
-	oadd(&world, (object(SP, sphere(point3(2, 0, -5), 2))));
+	oadd(&world, object(SP, sphere(point3(2, 0, -5), 2), color3(0, 0.5, 0)));
+	/*	add SP3 in the world	*/
+	oadd(&world, object(SP, sphere(point3(0, -1000, 0), 1000), color3(1, 1, 1)));
 	scene->world = world;
-	lights = object(LIGHT_POINT, light_point(point(3, 3, 0), color3(1, 0, 0), 0.5));
+	/*	color3(0, 0, 0) is dummy albedo	*/
+	lights = object(LIGHT_POINT, light_point(point3(0, 5, 0), color3(1, 1, 1), 0.5), color3(0, 0, 0));
 	scene->light = lights;
 	return (scene);
 }

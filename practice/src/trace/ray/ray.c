@@ -49,7 +49,7 @@ t_color3		ray_color(t_scene *scene)
 	   (If the ray and sphere have an intersection
 	   and the intersection is in front of the camera)	*/
 	if (hit(scene->world, &scene->ray, &scene->rec))
-		return (vmult(vplus(scene->rec.normal, color3(1, 1, 1)), 0.5));
+		return (phong_lighting(scene));
 	else
 	{
 	/* Coefficient to give gradient based on ray->dir.y value.	*/
