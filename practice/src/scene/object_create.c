@@ -23,6 +23,18 @@ t_plane		*plane(t_point3 p, t_vec3 normal)
 	return (pl);
 }
 
+t_triangle	*triangle(t_point3 p0, t_point3 p1, t_point3 p2)
+{
+	t_triangle	*tr;
+
+	if (!(tr = (t_triangle *)malloc(sizeof(t_triangle))))
+		return (NULL);
+	tr->p0 = p0;
+	tr->p1 = p1;
+	tr->p2 = p2;
+	return (tr);
+}
+
 t_object	*object(t_object_type type, void *element, t_color3 albedo)
 {
 	t_object	*new;
