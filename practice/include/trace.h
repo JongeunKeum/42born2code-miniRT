@@ -15,7 +15,8 @@ t_bool		in_shadow(t_object *objs, t_ray light_ray, double light_len);
 /*	trace/hit/	*/
 t_bool		hit(t_object *obj, t_ray *ray, t_hit_record *rec);
 t_bool		hit_obj(t_object *obj, t_ray *ray, t_hit_record *rec);
-double		hit_sphere(t_object *sp_obj, t_ray *ray, t_hit_record *rec);
+t_bool		hit_sphere(t_object *sp_obj, t_ray *ray, t_hit_record *rec);
+t_bool		hit_plane(t_object *pl_obj, t_ray *ray, t_hit_record *rec);
 void		set_face_normal(t_ray *r, t_hit_record *rec);
 
 #endif
