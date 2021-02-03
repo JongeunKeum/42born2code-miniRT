@@ -5,7 +5,7 @@
 /*	The reason for changing the first argument of hit_sphere
 	from (t_sphere *) to (t_object *) is that texture and rotation transformation
 	will be added to the t_object structure, so I have modified it in advance.	*/
-double	hit_sphere(t_object *sp_obj, t_ray *ray, t_hit_record *rec)
+t_bool	hit_sphere(t_object *sp_obj, t_ray *ray, t_hit_record *rec)
 {
 	t_sphere	*sp;
 	t_vec3		oc;

@@ -12,6 +12,17 @@ t_sphere	*sphere(t_point3 center, double radius)
 	return (sp);
 }
 
+t_plane		*plane(t_point3 p, t_vec3 normal)
+{
+	t_plane	*pl;
+
+	if (!(pl = (t_plane *)malloc(sizeof(t_plane))))
+		return (NULL);
+	pl->p = p;
+	pl->normal = normal;
+	return (pl);
+}
+
 t_object	*object(t_object_type type, void *element, t_color3 albedo)
 {
 	t_object	*new;
