@@ -35,6 +35,21 @@ t_triangle	*triangle(t_point3 p0, t_point3 p1, t_point3 p2)
 	return (tr);
 }
 
+t_cylinder	*cylinder(t_point3 center, t_vec3 normal, double d, double h)
+{
+	t_cylinder	*cy;
+
+	if (!(cy = (t_cylinder *)malloc(sizeof(t_cylinder))))
+		return (NULL);
+	cy->center = center;
+	cy->normal = normal;
+	cy->diameter = d;
+	cy->radius = d / 2;
+	cy->radius2 = pow(cy->radius, 2);
+	cy->height = h;
+	return (cy);
+}
+
 t_object	*object(t_object_type type, void *element, t_color3 albedo)
 {
 	t_object	*new;
