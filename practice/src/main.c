@@ -15,8 +15,8 @@ t_scene	*scene_init(void)
 		but appropriate error handling is required.	*/
 	if (!(scene = (t_scene *)malloc(sizeof(t_scene))))
 		return (NULL);
-	scene->canvas = canvas(400, 300);
-	scene->camera = camera(&scene->canvas, point3(0, 0, 30));
+	scene->canvas = canvas(1600, 900);
+	scene->camera = camera(&scene->canvas, point3(0, 5, 10));
 	/*	add SP1 in the world	*/
 	world = object(SP, sphere(point3(-2, 0, -7), 2), color3(0.5, 0, 0));
 	/*	add SP2 in the world	*/
@@ -26,14 +26,14 @@ t_scene	*scene_init(void)
 	oadd(&world, object(PL, plane(point3(0, 20, 0), vec3(0, 1, 0)), color3(0.7, 0.1, 0.3)));
 	oadd(&world, object(PL, plane(point3(-30, 0, 0), vec3(1, 0, 0)), color3(0.5, 0.5, 0)));
 	oadd(&world, object(PL, plane(point3(30, 0, 0), vec3(1, 0, 0)), color3(0.5, 0.5, 0)));
-	oadd(&world, object(PL, plane(point3(0, 0, -50), vec3(0, 0, 1)), color3(0.1, 0.1, 0.7)));
+	oadd(&world, object(PL, plane(point3(0, 0, -40), vec3(0, 0, 1)), color3(0.1, 0.1, 0.7)));
 	/*	add TR in the world	*/
 	oadd(&world, object(TR, triangle(point3(-7, 2, -2), point3(-2, 2, -5), point3(-4, 7, -3)), color3(0.4, 0, 0.6)));
 	/*	add CY in the world	*/
-	oadd(&world, object(CY, cylinder(point3(10, 0, -5), vec3(0, 1, 0), 2, 3), color3(0.9, 0, 0.4)));
+	oadd(&world, object(CY, cylinder(point3(10, 0, -5), vec3(1, 2, -2), 3, 6), color3(0.9, 0, 0.4)));
 	scene->world = world;
 	/*	color3(0, 0, 0) is dummy albedo	*/
-	lights = object(LIGHT_POINT, light_point(point3(0, 15, 5), color3(1, 1, 1), 0.5), color3(0, 0, 0));
+	lights = object(LIGHT_POINT, light_point(point3(-3, 15, 5), color3(1, 1, 1), 0.5), color3(0, 0, 0));
 	scene->light = lights;
 	return (scene);
 }
