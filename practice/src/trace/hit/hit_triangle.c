@@ -9,6 +9,7 @@ t_bool	hit_triangle(t_object *tr_obj, t_ray *ray, t_hit_record *rec)
 	t_vec3		edge1;	/*	p1p2 (p2 - p1)	*/
 	t_vec3		edge2;	/*	p2p0 (p0 - p2)	*/
 	t_vec3		normal;
+	t_point3	p;
 	double		denominator;
 	double		d;
 	double		root;
@@ -25,14 +26,15 @@ t_bool	hit_triangle(t_object *tr_obj, t_ray *ray, t_hit_record *rec)
 	if (root < rec->tmin || root > rec->tmax)
 		return (FALSE);
 	edge1 = vminus(tr->p2, tr->p1);
+	p = ray_at(ray, root);
+	if (vdot(normal, vcross(edge0, vminus(p, tr->p0))) < 0)
+		return (FALSE);
+	if (vdot(normal, vcross(edge1, vminus(p, tr->p1))) < 0)
+		return (FALSE);
+	if (vdot(normal, vcross(edge2, vminus(p, tr->p2))) < 0)
+		return (FALSE);
 	rec->t = root;
-	rec->p = ray_at(ray, root);
-	if (vdot(normal, vcross(edge0, vminus(rec->p, tr->p0))) < 0)
-		return (FALSE);
-	if (vdot(normal, vcross(edge1, vminus(rec->p, tr->p1))) < 0)
-		return (FALSE);
-	if (vdot(normal, vcross(edge2, vminus(rec->p, tr->p2))) < 0)
-		return (FALSE);
+	rec->p = p;
 	rec->normal = vunit(normal);
 	set_face_normal(ray, rec);
 	rec->albedo = tr_obj->albedo;
