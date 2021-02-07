@@ -1,1 +1,1 @@
-# 42born2code_cub3d
+# 42born2code_miniRT
