@@ -12,6 +12,11 @@ t_bool	hit_plane(t_object *pl_obj, t_ray *ray, t_hit_record *rec)
 	pl = pl_obj->element;
 	op = vminus(pl->p, ray->orig);
 	denominator = vdot(ray->dir, pl->normal);
+	/*	When the denominator approaches 0, an exception is thrown
+		because the ray and the plane are parallel.
+		Since the denominator is double type,
+		the comparison was not performed as `denominator == 0`,
+		but rather as `fabs(denominator) <= EPSILON`.	*/
 	if (fabs(denominator) <= EPSILON)
 		return (FALSE);
 	root = vdot(op, pl->normal) / denominator;

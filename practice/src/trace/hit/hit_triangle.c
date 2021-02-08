@@ -17,6 +17,8 @@ t_bool	hit_triangle(t_object *tr_obj, t_ray *ray, t_hit_record *rec)
 	tr = tr_obj->element;
 	edge0 = vminus(tr->p1, tr->p0);
 	edge2 = vminus(tr->p0, tr->p2);
+	/*	To satisfy the right-hand rule.
+		And we created three vertices in a counter-clockwise direction.	*/
 	normal = vcross(edge0, vmult(edge2, -1));
 	denominator = vdot(normal, ray->dir);
 	if (fabs(denominator) <= EPSILON)
@@ -27,6 +29,13 @@ t_bool	hit_triangle(t_object *tr_obj, t_ray *ray, t_hit_record *rec)
 		return (FALSE);
 	edge1 = vminus(tr->p2, tr->p1);
 	p = ray_at(ray, root);
+	/*	Conditional statement to check if the point P is inside the triangle.
+		Assumin that the result of the cross product
+		of the vector from one vertex(p0) to the point P
+		and the vector from the vertex(p0) to the next vertex(p1)
+		is called vector A,
+		it the dot product of vector A and the normal vector is less than 0,
+		the point P exists outside the triangle.	*/
 	if (vdot(normal, vcross(edge0, vminus(p, tr->p0))) < 0)
 		return (FALSE);
 	if (vdot(normal, vcross(edge1, vminus(p, tr->p1))) < 0)
