@@ -18,6 +18,7 @@ typedef struct	s_sphere		t_sphere;
 typedef	struct	s_plane			t_plane;
 typedef	struct	s_triangle		t_triangle;
 typedef	struct	s_cylinder		t_cylinder;
+typedef	struct	s_square		t_square;
 typedef struct	s_object		t_object;
 typedef	struct	s_light			t_light;
 
@@ -31,6 +32,7 @@ typedef int						t_object_type;
 # define PL 2
 # define TR 3
 # define CY 4
+# define SQ 5
 # define LIGHT_POINT 1
 
 /*	A very small value	*/
@@ -122,6 +124,14 @@ struct	s_cylinder
 	double		radius;
 	double		radius2;
 	double		height;
+};
+
+struct	s_square
+{
+	t_point3	center;
+	t_vec3		normal;
+	double		length;
+	t_vec3		vertex;
 };
 
 struct	s_object
