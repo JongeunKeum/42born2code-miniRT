@@ -31,6 +31,13 @@ t_scene	*scene_init(void)
 	oadd(&world, object(TR, triangle(point3(-7, 2, -2), point3(-2, 2, -5), point3(-4, 7, -3)), color3(0.4, 0, 0.6)));
 	/*	add CY in the world	*/
 	oadd(&world, object(CY, cylinder(point3(10, 0, -5), vec3(1, 2, -2), 3, 6), color3(0.9, 0, 0.4)));
+	/*	add SQ in the world	*/
+	oadd(&world, object(SQ, square(point3(-8, 0, -4), vec3(0, 0, 1), 4), color3(0.7, 0.8, 0.3)));
+	oadd(&world, object(SQ, square(point3(-8, 0, -8), vec3(0, 0, 1), 4), color3(0.7, 0.8, 0.3)));
+	oadd(&world, object(SQ, square(point3(-8, -2, -6), vec3(0, 1, 0), 4), color3(0.7, 0.8, 0.3)));
+	oadd(&world, object(SQ, square(point3(-8, 2, -6), vec3(0, 1, 0), 4), color3(0.7, 0.8, 0.3)));
+	oadd(&world, object(SQ, square(point3(-10, 0, -6), vec3(1, 0, 0), 4), color3(0.7, 0.8, 0.3)));
+	oadd(&world, object(SQ, square(point3(-6, 0, -6), vec3(1, 0, 0), 4), color3(0.7, 0.8, 0.3)));
 	scene->world = world;
 	/*	color3(0, 0, 0) is dummy albedo	*/
 	lights = object(LIGHT_POINT, light_point(point3(-3, 15, 5), color3(1, 1, 1), 0.5), color3(0, 0, 0));

@@ -50,6 +50,26 @@ t_cylinder	*cylinder(t_point3 center, t_vec3 normal, double d, double h)
 	return (cy);
 }
 
+t_square	*square(t_point3 center, t_vec3 normal, double length)
+{
+	t_square	*sq;
+
+	if (!(sq = (t_square *)malloc(sizeof(t_square))))
+		return (NULL);
+	sq->center = center;
+	sq->normal = vunit(normal);
+	sq->length = length;
+	if (fabs(sq->normal.x) == 1 && sq->normal.y == 0 && sq->normal.z == 0)
+		sq->vertex = vec3(0, 1, 1);
+	else if (sq->normal.x == 0 && fabs(sq->normal.y) == 1 && sq->normal.z == 0)
+		sq->vertex = vec3(1, 0, 1);
+	else if (sq->normal.x == 0 && sq->normal.y == 0 && fabs(sq->normal.z) == 1)
+		sq->vertex = vec3(1, 1, 0);
+	else
+		return (NULL);
+	return (sq);
+}
+
 t_object	*object(t_object_type type, void *element, t_color3 albedo)
 {
 	t_object	*new;

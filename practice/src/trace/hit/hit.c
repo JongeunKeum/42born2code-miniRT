@@ -36,5 +36,7 @@ t_bool	hit_obj(t_object *world, t_ray *ray, t_hit_record *rec)
 		hit_result = hit_triangle(world, ray, rec);
 	else if (world->type == CY)
 		hit_result = hit_cylinder(world, ray, rec);
+	else if (world->type == SQ)
+		hit_result = hit_square(world, ray, rec);
 	return (hit_result);
 }
