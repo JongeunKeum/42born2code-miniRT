@@ -1,7 +1,6 @@
 #ifndef UTILS_H
 # define UTILS_H
 
-# include <math.h>
 # include <stdlib.h>
 # include <stdio.h>
 # include "structures.h"

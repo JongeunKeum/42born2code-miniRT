@@ -1,6 +1,9 @@
 #ifndef STRUCTURES_H
 # define STRUCTURES_H
 
+# define _USE_MATH_DEFINES
+# include <math.h>
+
 /*	common structure	*/
 typedef struct	s_vec3			t_vec3;
 typedef struct	s_vec3			t_point3;
@@ -27,6 +30,14 @@ typedef int						t_bool;
 # define FALSE 0
 # define TRUE 1
 
+# define X 1
+# define Y 2
+# define Z 3
+# define PLUS 4
+# define MINUS 5
+# define THETA (M_PI / (double)18)
+
+/*	object type macro	*/
 typedef int						t_object_type;
 # define SP 0
 # define PL 2
@@ -99,6 +110,7 @@ struct	s_scene
 struct	s_sphere
 {
 	t_point3	center;
+	double		diameter;
 	double		radius;
 	double		radius2;
 };
