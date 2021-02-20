@@ -1,14 +1,13 @@
 #include "scene.h"
 
-t_sphere	*sphere(t_point3 center, double radius)
+t_sphere	*sphere(t_point3 center, double diameter)
 {
 	t_sphere	*sp;
 
 	if (!(sp = (t_sphere *)malloc(sizeof(t_sphere))))
 		return (NULL);
 	sp->center = center;
-	sp->radius = radius;
-	sp->radius2 = radius * radius;
+	sp->diameter = diameter;
 	return (sp);
 }
 
@@ -44,8 +43,6 @@ t_cylinder	*cylinder(t_point3 center, t_vec3 normal, double d, double h)
 	cy->center = center;
 	cy->normal = normal;
 	cy->diameter = d;
-	cy->radius = d / 2;
-	cy->radius2 = pow(cy->radius, 2);
 	cy->height = h;
 	return (cy);
 }

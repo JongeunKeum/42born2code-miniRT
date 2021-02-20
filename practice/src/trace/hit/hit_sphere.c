@@ -17,6 +17,8 @@ t_bool	hit_sphere(t_object *sp_obj, t_ray *ray, t_hit_record *rec)
 	double		root;
 
 	sp = sp_obj->element;
+	sp->radius = sp->diameter / 2;
+	sp->radius2 = pow(sp->radius, 2);
 	oc = vminus(ray->orig, sp->center);
 	a = vdot(ray->dir, ray->dir);	/*	vlength2(ray->dir);	*/
 	half_b = vdot(oc, ray->dir);	/*	Formula for even roots	*/
