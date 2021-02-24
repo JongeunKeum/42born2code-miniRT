@@ -6,15 +6,17 @@ t_bool	hit_square(t_object *sq_obj, t_ray *ray, t_hit_record *rec)
 {
 	t_square	*sq;
 	t_vec3		op;
+	double		a;
+	double		b;
+	double		c;
 	t_point3	p;
-	t_point3	left_bottom;
-	t_point3	right_top;
-	t_point3	lb;
-	t_point3	rt;
 	double		denominator;
 	double		root;
+	t_point3	sq_p1;
+	t_point3	sq_p2;
 
 	sq = sq_obj->element;
+	/*	*/
 	op = vminus(sq->center, ray->orig);
 	denominator = vdot(ray->dir, sq->normal);
 	if (fabs(denominator) <= EPSILON)
@@ -23,14 +25,37 @@ t_bool	hit_square(t_object *sq_obj, t_ray *ray, t_hit_record *rec)
 	if (root < rec->tmin || root > rec->tmax)
 		return (FALSE);
 	p = ray_at(ray, root);
-	left_bottom = vminus(sq->center, vmult(sq->vertex, sq->length / 2));
-	right_top = vplus(sq->center, vmult(sq->vertex, sq->length / 2));
-	lb = vminus_(left_bottom, EPSILON, EPSILON, EPSILON);
-	rt = vplus_(right_top, EPSILON, EPSILON, EPSILON);
-	if (p.x < lb.x || p.y < lb.y || p.z < lb.z)
-		return (FALSE);
-	else if (p.x > rt.x || p.y > rt.y || p.z > rt.z)
-		return (FALSE);
+	/*	*/
+	c = sq->normal.x / sq->normal.y;
+	a = 1 + pow(c, 2);
+	b = sq->center.x;
+	sq_p1.x = b + sqrt(a * sq->length * sq->length) / (a * 2);
+	sq_p1.y = (-1) * c * sqrt(sq->length * sq->length * a) / (a * 2) + sq->center.y;
+	sq_p1.z = sq->center.z;
+	sq_p2.x = b - sqrt(a * sq->length * sq->length) / (a * 2);
+	sq_p2.y = c * sqrt(sq->length * sq->length * a) / (a * 2) + sq->center.y;
+	sq_p2.z = sq->center.z;
+	/*	*/
+	if (sq_p1.x < sq_p2.x)
+	{
+		if (p.x < sq_p1.x - EPSILON || p.x > sq_p2.x + EPSILON)
+			return (FALSE);
+	}
+	else if (sq_p1.x > sq_p2.x)
+	{
+		if (p.x > sq_p1.x + EPSILON || p.x < sq_p1.x - EPSILON)
+			return (FALSE);
+	}
+	if (sq_p1.y < sq_p2.y)
+	{
+		if (p.y < sq_p1.y - EPSILON || p.y > sq_p2.y + EPSILON)
+			return (FALSE);
+	}
+	else if (sq_p1.y > sq_p2.y)
+	{
+		if (p.y > sq_p1.y + EPSILON || p.y < sq_p1.y - EPSILON)
+			return (FALSE);
+	}
 	rec->t = root;
 	rec->p = p;
 	rec->normal = sq->normal;
