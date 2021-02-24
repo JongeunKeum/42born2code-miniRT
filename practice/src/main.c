@@ -20,6 +20,7 @@ t_scene	*scene_init(void)
 	scene->camera = camera(&scene->canvas, point3(0, 5, 10));
 //	world = object(SQ, square(point3(-8, 0, -4), vec3(0, 0, 1), 4), color3(0.7, 0.8, 0.3));
 	world = object(PL, plane(point3(0, -20, 0), vec3(0, 1, 0)), color3(0.2, 0.3, 0));
+//	world = object(CY, cylinder(point3(10, 0, -5), vec3(0, 1, 0), 3, 6), color3(0.9, 0, 0.4));
 	/*	add SP1 in the world	*/
 //	world = object(SP, sphere(point3(-2, 0, -7), 4), color3(0.5, 0, 0));
 	/*	add SP2 in the world	*/
@@ -35,7 +36,7 @@ t_scene	*scene_init(void)
 	/*	add CY in the world	*/
 	oadd(&world, object(CY, cylinder(point3(10, 0, -5), vec3(0, 1, 0), 3, 6), color3(0.9, 0, 0.4)));
 	/*	add SQ in the world	*/
-//	oadd(&world, object(SQ, square(point3(-8, 0, -4), vec3(0, 0, 1), 4), color3(0.7, 0.8, 0.3)));
+	oadd(&world, object(SQ, square(point3(-8, 0, -4), vec3(0, 0, 1), 4), color3(0.7, 0.8, 0.3)));
 	oadd(&world, object(SQ, square(point3(-8, 0, -8), vec3(0, 0, 1), 4), color3(0.7, 0.8, 0.3)));
 	oadd(&world, object(SQ, square(point3(-8, -2, -6), vec3(0, 1, 0), 4), color3(0.7, 0.8, 0.3)));
 	oadd(&world, object(SQ, square(point3(-8, 2, -6), vec3(0, 1, 0), 4), color3(0.7, 0.8, 0.3)));
@@ -59,9 +60,9 @@ int		main(void)
 
 	/*	scene setting	*/
 	scene = scene_init();
-//	translate(scene->world, X, PLUS);
+//	translate(scene->world, Y, PLUS);
 //	scale(scene->world, MINUS);
-	rotate(scene->world, X, PLUS);
+//	rotate(scene->world, X, PLUS);
 	/*	rendering	*/
 	printf("P3\n%d %d\n255\n", scene->canvas.width, scene->canvas.height);
 	j = scene->canvas.height;
