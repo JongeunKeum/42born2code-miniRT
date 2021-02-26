@@ -19,14 +19,14 @@ t_scene	*scene_init(void)
 	scene->canvas = canvas(800, 600);
 	scene->camera = camera(&scene->canvas, point3(0, 5, 10));
 //	world = object(SQ, square(point3(-8, 0, -4), vec3(0, 0, 1), 4), color3(0.7, 0.8, 0.3));
-	world = object(PL, plane(point3(0, -20, 0), vec3(0, 1, 0)), color3(0.2, 0.3, 0));
+//	world = object(PL, plane(point3(0, -20, 0), vec3(0, 1, 0)), color3(0.2, 0.3, 0));
 //	world = object(CY, cylinder(point3(10, 0, -5), vec3(0, 1, 0), 3, 6), color3(0.9, 0, 0.4));
 	/*	add SP1 in the world	*/
-//	world = object(SP, sphere(point3(-2, 0, -7), 4), color3(0.5, 0, 0));
+	world = object(SP, sphere(point3(-2, 0, -7), 4), color3(0.5, 0, 0));
 	/*	add SP2 in the world	*/
 	oadd(&world, object(SP, sphere(point3(2, 0, -10), 6), color3(0, 0.5, 0)));
 	/*	add PL in the world	*/
-//	oadd(&world, object(PL, plane(point3(0, -20, 0), vec3(0, 1, 0)), color3(0.2, 0.3, 0)));
+	oadd(&world, object(PL, plane(point3(0, -20, 0), vec3(0, 1, 0)), color3(0.2, 0.3, 0)));
 	oadd(&world, object(PL, plane(point3(0, 20, 0), vec3(0, 1, 0)), color3(0.7, 0.1, 0.3)));
 	oadd(&world, object(PL, plane(point3(-30, 0, 0), vec3(1, 0, 0)), color3(0.5, 0.5, 0)));
 	oadd(&world, object(PL, plane(point3(30, 0, 0), vec3(1, 0, 0)), color3(0.5, 0.5, 0)));
@@ -36,12 +36,13 @@ t_scene	*scene_init(void)
 	/*	add CY in the world	*/
 	oadd(&world, object(CY, cylinder(point3(10, 0, -5), vec3(0, 1, 0), 3, 6), color3(0.9, 0, 0.4)));
 	/*	add SQ in the world	*/
-	oadd(&world, object(SQ, square(point3(-8, 0, -4), vec3(0, 0, 1), 4), color3(0.7, 0.8, 0.3)));
-	oadd(&world, object(SQ, square(point3(-8, 0, -8), vec3(0, 0, 1), 4), color3(0.7, 0.8, 0.3)));
-	oadd(&world, object(SQ, square(point3(-8, -2, -6), vec3(0, 1, 0), 4), color3(0.7, 0.8, 0.3)));
-	oadd(&world, object(SQ, square(point3(-8, 2, -6), vec3(0, 1, 0), 4), color3(0.7, 0.8, 0.3)));
-	oadd(&world, object(SQ, square(point3(-10, 0, -6), vec3(1, 0, 0), 4), color3(0.7, 0.8, 0.3)));
-	oadd(&world, object(SQ, square(point3(-6, 0, -6), vec3(1, 0, 0), 4), color3(0.7, 0.8, 0.3)));
+//	oadd(&world, object(SQ, square(point3(-8, 0, -4), vec3(0, 0, 1), 4), color3(0.7, 0.8, 0.3)));
+//	oadd(&world, object(SQ, square(point3(-8, 0, -8), vec3(0, 0, 1), 4), color3(0.7, 0.8, 0.3)));
+//	oadd(&world, object(SQ, square(point3(-8, -2, -6), vec3(0, 1, 0), 4), color3(0.7, 0.8, 0.3)));
+//	oadd(&world, object(SQ, square(point3(-8, 2, -6), vec3(0, 1, 0), 4), color3(0.7, 0.8, 0.3)));
+//	oadd(&world, object(SQ, square(point3(-10, 0, -6), vec3(1, 0, 0), 4), color3(0.7, 0.8, 0.3)));
+//	oadd(&world, object(SQ, square(point3(-6, 0, -6), vec3(1, 0, 0), 4), color3(0.7, 0.8, 0.3)));
+	oadd(&world, object(SQ, square(point3(-6, 0, -6), vec3(1, 1, 4), 4), color3(0.7, 0.8, 0.3)));
 	scene->world = world;
 	/*	color3(0, 0, 0) is dummy albedo	*/
 	lights = object(LIGHT_POINT, light_point(point3(-3, 15, 5), color3(1, 1, 1), 0.5), color3(0, 0, 0));
