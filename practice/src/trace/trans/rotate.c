@@ -1,6 +1,6 @@
 #include "trans.h"
 
-t_vec3	rotate_x(t_vec3 normal, int sign)
+t_vec3	rotate_z(t_vec3 normal, int sign)
 {
 	t_vec3	result;
 
@@ -18,7 +18,7 @@ t_vec3	rotate_x(t_vec3 normal, int sign)
 	return (result);
 }
 
-t_vec3	rotate_y(t_vec3 normal, int sign)
+t_vec3	rotate_x(t_vec3 normal, int sign)
 {
 	t_vec3	result;
 
@@ -36,19 +36,19 @@ t_vec3	rotate_y(t_vec3 normal, int sign)
 	return (result);
 }
 
-t_vec3	rotate_z(t_vec3 normal, int sign)
+t_vec3	rotate_y(t_vec3 normal, int sign)
 {
 	t_vec3	result;
 
 	if (sign == PLUS)
 	{
-		result.x = normal.z * cos(THETA) - normal.x * sin(THETA);
-		result.z = normal.z * sin(THETA) + normal.x * cos(THETA);
+		result.z = normal.z * cos(THETA) - normal.x * sin(THETA);
+		result.x = normal.z * sin(THETA) + normal.x * cos(THETA);
 	}
 	else if (sign == MINUS)
 	{
-		result.x = normal.z * cos(-THETA) - normal.x * sin(-THETA);
-		result.z = normal.x * sin(-THETA) + normal.z * cos(-THETA);
+		result.z = normal.z * cos(-THETA) - normal.x * sin(-THETA);
+		result.x = normal.x * sin(-THETA) + normal.z * cos(-THETA);
 	}
 	result.y = normal.y;
 	return (result);
