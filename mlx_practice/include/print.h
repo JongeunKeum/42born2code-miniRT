@@ -4,10 +4,10 @@
 # include <stdio.h>
 # include "structures.h"
 
-//void	write_color(t_color3 pixel_color);
-int	create_rgb(t_color3 *color);
-int	get_r(int rgb);
-int	get_g(int rgb);
-int	get_b(int rgb);
+void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
+int		create_rgb(t_color3 *color);
+int		get_r(int rgb);
+int		get_g(int rgb);
+int		get_b(int rgb);
 
 #endif

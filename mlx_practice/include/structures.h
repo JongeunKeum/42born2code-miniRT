@@ -10,7 +10,10 @@ typedef struct	s_vec3			t_point3;
 typedef struct	s_vec3			t_color3;
 typedef struct	s_ray			t_ray;
 typedef struct	s_hit_record	t_hit_record;
+
+/*	mlx structure	*/
 typedef	struct	s_data			t_data;
+typedef	struct	s_vars			t_vars;
 
 /*	scene structure	*/
 typedef struct	s_camera		t_camera;
@@ -78,6 +81,7 @@ struct	s_hit_record
 	t_color3	albedo;
 };
 
+/*	mlx structure	*/
 struct	s_data
 {
 	void	*img;
@@ -85,7 +89,13 @@ struct	s_data
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
-};	
+};
+
+struct	s_vars
+{
+	void	*mlx;
+	void	*win;
+};
 
 /*	scene structure	*/
 struct	s_camera
