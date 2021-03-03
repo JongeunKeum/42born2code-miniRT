@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   object_create.c                                    :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: hyunlee <hyunlee@student.42seoul.kr>       +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/02 18:55:53 by hyunlee           #+#    #+#             */
-/*   Updated: 2021/03/02 21:54:54 by hyunlee          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "minirt.h"
 
 t_object	*object(t_object_type type, void *element, t_color3 albedo)
@@ -72,20 +60,15 @@ t_cylinder	*cylinder(t_point3 center, t_vec3 normal, double diameter, double hei
 	return (cy);
 }
 
-t_triangle	*triangle(t_point3 a, t_point3 b, t_point3 c)
+t_triangle	*triangle(t_point3 p0, t_point3 p1, t_point3 p2)
 {
 	t_triangle	*tr;
-	t_vec3		ab;
-	t_vec3		ac;
 
 	if (!(tr = (t_triangle *)malloc(sizeof(t_triangle))))
 		return (NULL);
-	tr->a = a;
-	tr->b = b;
-	tr->c = c;
-	ab = vsub(b, a);
-	ac = vsub(c, a);
-	tr->normal = vcross(ab, ac);
+	tr->p0 = p0;
+	tr->p1 = p1;
+	tr->p2 = p2;
 	return (tr);
 }
 

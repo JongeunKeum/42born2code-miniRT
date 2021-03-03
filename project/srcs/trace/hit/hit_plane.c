@@ -8,7 +8,7 @@ t_bool	hit_plane(t_object *pl_obj, t_ray *ray, t_hit_record *rec)
 	double	root;
 
 	pl = pl_obj->element;
-	op = vminus(pl->p, ray->orig);
+	op = vminus(pl->center, ray->orig);
 	denominator = vdot(ray->dir, pl->normal);
 	if (fabs(denominator) <= EPSILON)
 		return (FALSE);

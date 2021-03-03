@@ -87,7 +87,7 @@ void    translate(t_object *obj, int axis, int sign)
     else if (obj->type == PL)
 	{
 		pl = obj->element;
-		pl->p = translate_center(pl->p, axis, sign);
+		pl->center = translate_center(pl->center, axis, sign);
 	}
     else if (obj->type == TR)
 		translate_tr(obj, axis, sign);

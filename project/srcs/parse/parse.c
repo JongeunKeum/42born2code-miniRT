@@ -1,20 +1,8 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   parse.c                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: hyunlee <hyunlee@student.42seoul.kr>       +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/02 16:11:35 by hyunlee           #+#    #+#             */
-/*   Updated: 2021/03/03 00:01:55 by hyunlee          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "minirt.h"
 
 int	info_r(char	**info, t_scene *scene)
 {
-	if (info[0][1] != '\0' || info[3] != '\0')
+	if (info[0][1] != '\0' || info[3] != NULL)
 		return (-1);
 	scene->canvas = canvas(atoi(info[1]), atoi(info[2]));
 	return (1);
@@ -32,7 +20,7 @@ int	info_c(char **info, t_scene *scene)
 	double		degrees;
 	char		**element;
 
-	if (info[0][1] != '\0' || info[4] != '\0')
+	if (info[0][1] != '\0' || info[4] != NULL)
 		return (-1);
 	element = ft_split(info[1], ',');
 	orig = point3(ft_atod(element[0]), ft_atod(element[1]), ft_atod(element[2]));
@@ -53,7 +41,7 @@ int	info_l(char **info, t_scene *scene)
 	t_color3	color;
 	char		**element;
 
-	if (info[0][1] != '\0' || info[4] != '\0')
+	if (info[0][1] != '\0' || info[4] != NULL)
 		return (-1);
 	element = ft_split(info[1], ',');
 	position = point3(ft_atod(element[0]), ft_atod(element[1]), ft_atod(element[2]));
@@ -62,7 +50,7 @@ int	info_l(char **info, t_scene *scene)
 	element = ft_split(info[3], ',');
 	color = color3(ft_atod(element[0]), ft_atod(element[1]), ft_atod(element[2]));
 	free(element);
-	color = vdiv(color, 255.0);
+	color = vdivide(color, 255.0);
 	oadd(&lights, object(LIGHT_POINT, light_point(position, color, bright_ratio), color3(0, 0, 0)));
 	return (1);
 }
@@ -74,7 +62,7 @@ int	info_sp(char **info, t_scene *scene, t_object **world)
 	t_color3	color;
 	char		**element;
 
-	if (info[0][2] != '\0' || info[4] != '\0')
+	if (info[0][2] != '\0' || info[4] != NULL)
 		return (-1);
 	element = ft_split(info[1], ',');
 	center = point3(ft_atod(element[0]), ft_atod(element[1]), ft_atod(element[2]));
@@ -83,7 +71,7 @@ int	info_sp(char **info, t_scene *scene, t_object **world)
 	element = ft_split(info[3], ',');
 	color = color3(ft_atod(element[0]), ft_atod(element[1]), ft_atod(element[2]));
 	free(element);
-	color = vdiv(color, 255.0);
+	color = vdivide(color, 255.0);
 	oadd(world, object(SP, sphere(center, diameter), color));
 	return (1);
 }
@@ -95,7 +83,7 @@ int	info_pl(char **info, t_scene *scene, t_object **world)
 	t_color3	color;
 	char		**element;
 
-	if (info[0][2] != '\0' || info[4] != '\0')
+	if (info[0][2] != '\0' || info[4] != NULL)
 		return (-1);
 	element = ft_split(info[1], ',');
 	center = point3(ft_atod(element[0]), ft_atod(element[1]), ft_atod(element[2]));
@@ -106,7 +94,7 @@ int	info_pl(char **info, t_scene *scene, t_object **world)
 	element = ft_split(info[3], ',');
 	color = color3(ft_atod(element[0]), ft_atod(element[1]), ft_atod(element[2]));
 	free(element);
-	color = vdiv(color, 255.0);
+	color = vdivide(color, 255.0);
 	oadd(world, object(PL, plane(center, normal), color));
 	return (1);
 }
@@ -119,7 +107,7 @@ int	info_sq(char **info, t_scene *scene, t_object **world)
 	t_color3	color;
 	char		**element;
 
-	if (info[0][2] != '\0' || info[5] != '\0')
+	if (info[0][2] != '\0' || info[5] != NULL)
 		return (-1);
 	element = ft_split(info[1], ',');
 	center = point3(ft_atod(element[0]), ft_atod(element[1]), ft_atod(element[2]));
@@ -131,7 +119,7 @@ int	info_sq(char **info, t_scene *scene, t_object **world)
 	element = ft_split(info[4], ',');
 	color = color3(ft_atod(element[0]), ft_atod(element[1]), ft_atod(element[2]));
 	free(element);
-	color = vdiv(color, 255.0);
+	color = vdivide(color, 255.0);
 	oadd(world, object(SQ, square(center, normal, length), color));
 	return(1);
 }
@@ -143,7 +131,7 @@ int	info_cy(char **info, t_scene *scene, t_object **world)
 	t_color3	color;
 	char		**element;
 
-	if (info[0][2] != '\0' || info[6] != '\0')
+	if (info[0][2] != '\0' || info[6] != NULL)
 		return (-1);
 	element = ft_split(info[1], ',');
 	center = point3(ft_atod(element[0]), ft_atod(element[1]), ft_atod(element[2]));
@@ -154,7 +142,7 @@ int	info_cy(char **info, t_scene *scene, t_object **world)
 	element = ft_split(info[5], ',');
 	color = color3(ft_atod(element[0]), ft_atod(element[1]), ft_atod(element[2]));
 	free(element);
-	color = vdiv(color, 255.0);
+	color = vdivide(color, 255.0);
 	oadd(world, object(CY, cylinder(center, normal, ft_atod(info[3]), ft_atod(info[4])), color));
 	return (1);
 }
@@ -167,7 +155,7 @@ int	info_tr(char **info, t_scene *scene, t_object **world)
 	t_color3	color;
 	char		**element;
 
-	if (info[0][2] != '\0' || info[5] != '\0')
+	if (info[0][2] != '\0' || info[5] != NULL)
 		return (-1);
 	element = ft_split(info[1], ',');
 	a = point3(ft_atod(element[0]), ft_atod(element[1]), ft_atod(element[2]));
@@ -181,7 +169,7 @@ int	info_tr(char **info, t_scene *scene, t_object **world)
 	element = ft_split(info[4], ',');
 	color = color3(ft_atod(element[0]), ft_atod(element[1]), ft_atod(element[2]));
 	free(element);
-	color = vdiv(color, 255.0);
+	color = vdivide(color, 255.0);
 	oadd(world, object(TR, triangle(a, b, c), color));
 	return (1);
 }

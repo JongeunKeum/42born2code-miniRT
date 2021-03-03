@@ -53,7 +53,7 @@ char	*get_save(char *save)
 	int		save_len;
 	char	*dest;
 
-	save_len = ft_strlen(save);
+	save_len = ft_strlen_gnl(save);
 	i = 0;
 	while (save[i] != '\n' && save[i])
 		i++;
