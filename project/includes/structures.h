@@ -123,9 +123,9 @@ struct s_plane
 
 struct s_triangle
 {
-	t_point3	a;
-	t_point3	b;
-	t_point3	c;
+	t_point3	p0;
+	t_point3	p1;
+	t_point3	p2;
 	t_vec3		normal;
 };
 
@@ -157,7 +157,7 @@ struct  s_vars {
 	void	*mlx;
 	void	*win;
 	t_scene	*scene;
-	t_data	*img;
+	t_img	*img;
 };
 
 struct s_img {

@@ -5,6 +5,7 @@
 # include <math.h>
 # include <unistd.h>
 # include <stdlib.h>
+# include "mlx.h"
 # include "structures.h"
 # include "scene.h"
 # include "parse.h"
@@ -13,5 +14,6 @@
 # include "trace.h"
 # include "trans.h"
 # include "get_next_line.h"
+# include "libft.h"
 
 #endif

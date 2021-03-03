@@ -20,7 +20,7 @@
 #endif
 
 int		get_next_line(int fd, char **line);
-int		ft_strlen(char *str);
+int		ft_strlen_gnl(char *str);
 char	*ft_strjoin_gnl(char *save, char *buff);
 
 #endif
