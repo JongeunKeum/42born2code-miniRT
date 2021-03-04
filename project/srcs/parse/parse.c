@@ -4,7 +4,7 @@ int	info_r(char	**info, t_scene *scene)
 {
 	if (info[0][1] != '\0' || info[3] != NULL)
 		return (-1);
-	scene->canvas = canvas(atoi(info[1]), atoi(info[2]));
+	scene->canvas = canvas(ft_atoi(info[1]), ft_atoi(info[2]));
 	return (1);
 }
 
@@ -35,7 +35,6 @@ int	info_c(char **info, t_scene *scene)
 
 int	info_l(char **info, t_scene *scene)
 {
-	t_object	*lights;
 	t_point3	position;
 	double		bright_ratio;
 	t_color3	color;
@@ -51,7 +50,7 @@ int	info_l(char **info, t_scene *scene)
 	color = color3(ft_atod(element[0]), ft_atod(element[1]), ft_atod(element[2]));
 	free(element);
 	color = vdivide(color, 255.0);
-	oadd(&lights, object(LIGHT_POINT, light_point(position, color, bright_ratio), color3(0, 0, 0)));
+	oadd(&scene->light, object(LIGHT_POINT, light_point(position, color, bright_ratio), color3(0, 0, 0)));
 	return (1);
 }
 
@@ -182,7 +181,7 @@ int	handle_info(char **info, t_scene *scene)
 		info_r(info, scene);
 	// else if (info[0][0] == 'A')
 	// 	info_a(info, scene);
-	else if (info[0][0] == 'c')
+	else if (info[0][0] == 'c' && info[0][1] == '\0')
 		info_c(info, scene);
 	else if (info[0][0] == 'l')
 		info_l(info, scene);
@@ -208,8 +207,6 @@ int	parse_rt(char *argv, t_scene *scene)
 	char	*line;
 	char	**info;
 
-	if (!(scene = (t_scene *)malloc(sizeof(t_scene))))
-		return (-1);
 	fd = open(argv, O_RDONLY);
 	while ((ret = get_next_line(fd, &line)) > 0)
 	{
@@ -220,9 +217,5 @@ int	parse_rt(char *argv, t_scene *scene)
 	}
 	if (ret < 0)
 		return (-1);
-	info = ft_split(line,' ');
-	handle_info(info, scene);
-	free(line);
-	free(info);
 	return (1);
 }

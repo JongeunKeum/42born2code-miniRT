@@ -6,7 +6,7 @@
 /*   By: hyunlee <hyunlee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/02 17:44:45 by hyunlee           #+#    #+#             */
-/*   Updated: 2021/03/02 17:57:51 by hyunlee          ###   ########.fr       */
+/*   Updated: 2021/03/04 17:22:27 by jkeum            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	check_info_err(char **info)
 		while (info[i][j])
 		{
 			if (!(ft_isright_info(info[i][j])))
-				return (-1);
+				return (0);
 			j++;
 		}
 		i++;
