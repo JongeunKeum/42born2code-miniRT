@@ -58,8 +58,9 @@ all : $(NAME)
 $(NAME) : $(OBJS)
 	@$(MAKE) -C $(LIBFT_DIR)
 	@$(MAKE) -C $(MLX_DIR)
-	@$(CC) $(CFLAGS) -o $@ $^ -L$(LIBFT_DIR) -lft -L$(MLX_DIR) -lmlx
-	@install_name_tool -change $(MLX) $(MLX_DIR)/$(MLX) $(NAME)
+#	@$(CC) $(CFLAGS) -o $@ $^ -L$(LIBFT_DIR) -lft -L$(MLX_DIR) -lmlx
+	@$(CC) $(CFLAGS) -o $@ $^ -L$(LIBFT_DIR) -lft -L$(MLX_DIR) -lmlx -lXext -lX11 -lm -lbsd
+#	@install_name_tool -change $(MLX) $(MLX_DIR)/$(MLX) $(NAME)
 
 $(OBJS_DIR)/%.o : %.c
 	@mkdir -p $(OBJS_DIR)
