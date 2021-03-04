@@ -176,10 +176,6 @@ int	info_tr(char **info, t_scene *scene, t_object **world)
 
 int	handle_info(char **info, t_scene *scene)
 {
-	t_object	*world;
-
-	if (!(scene = (t_scene *)malloc(sizeof(t_scene))))
-		return (-1);
 	if (!(check_info_err(info)))
 		return (-1);
 	if (info[0][0] == 'R')
@@ -191,27 +187,29 @@ int	handle_info(char **info, t_scene *scene)
 	else if (info[0][0] == 'l')
 		info_l(info, scene);
 	else if (!(ft_strncmp(info[0], "sp", 2)))
-		info_sp(info, scene, &world);
+		info_sp(info, scene, &scene->world);
 	else if (!(ft_strncmp(info[0], "pl", 2)))
-		info_pl(info, scene, &world);
+		info_pl(info, scene, &scene->world);
 	else if (!(ft_strncmp(info[0], "sq", 2)))
-		info_sq(info, scene, &world);
+		info_sq(info, scene, &scene->world);
 	else if (!(ft_strncmp(info[0], "cy", 2)))
-		info_cy(info, scene, &world);
+		info_cy(info, scene, &scene->world);
 	else if (!(ft_strncmp(info[0], "tr", 2)))
-		info_tr(info, scene, &world);
+		info_tr(info, scene, &scene->world);
 	else
 		return (-1);
 	return (1);
 }
 
-int	parse_rt(char	*argv, t_scene *scene)
+int	parse_rt(char *argv, t_scene *scene)
 {
 	int		fd;
 	int		ret;
 	char	*line;
 	char	**info;
 
+	if (!(scene = (t_scene *)malloc(sizeof(t_scene))))
+		return (-1);
 	fd = open(argv, O_RDONLY);
 	while ((ret = get_next_line(fd, &line)) > 0)
 	{
