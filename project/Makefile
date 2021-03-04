@@ -1,7 +1,7 @@
 NAME = miniRT
 
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -g3 -fsanitize=address #-Wall -Wextra -Werror
 AR = ar
 ARFLAGS = rc
 
@@ -50,6 +50,7 @@ RM = rm -f
 
 MLX = libmlx.dylib
 MLX_DIR = ./lib/mlx
+MLX_MAC_DIR = ./lib/mlx_mac
 
 vpath %.c $(SRCS_DIR)
 
@@ -57,20 +58,23 @@ all : $(NAME)
 
 $(NAME) : $(OBJS)
 	@$(MAKE) -C $(LIBFT_DIR)
-	@$(MAKE) -C $(MLX_DIR)
-#	@$(CC) $(CFLAGS) -o $@ $^ -L$(LIBFT_DIR) -lft -L$(MLX_DIR) -lmlx
-	@$(CC) $(CFLAGS) -o $@ $^ -L$(LIBFT_DIR) -lft -L$(MLX_DIR) -lmlx -lXext -lX11 -lm -lbsd
-#	@install_name_tool -change $(MLX) $(MLX_DIR)/$(MLX) $(NAME)
+#	@$(MAKE) -C $(MLX_DIR)
+	@$(MAKE) -C $(MLX_MAC_DIR)
+	@$(CC) $(CFLAGS) -o $@ $^ -L$(LIBFT_DIR) -lft -L$(MLX_MAC_DIR) -lmlx
+	@install_name_tool -change $(MLX) $(MLX_MAC_DIR)/$(MLX) $(NAME)
+#	@$(CC) $(CFLAGS) -o $@ $^ -L$(LIBFT_DIR) -lft -L$(MLX_DIR) -lmlx -lXext -lX11 -lm -lbsd
 
 $(OBJS_DIR)/%.o : %.c
 	@mkdir -p $(OBJS_DIR)
-	@$(CC) $(CFLAG) -o $@ -I$(INC) -I$(LIBFT_DIR) -I$(MLX_DIR) -c $<
+#	@$(CC) $(CFLAGS) -o $@ -I$(INC) -I$(LIBFT_DIR) -I$(MLX_DIR) -c $<
+	@$(CC) $(CFLAGS) -o $@ -I$(INC) -I$(LIBFT_DIR) -I$(MLX_MAC_DIR) -c $<
 
 bonus : all
 
 clean :
 	@$(MAKE) -C $(LIBFT_DIR) fclean
-	@$(MAKE) -C $(MLX_DIR) clean
+#	@$(MAKE) -C $(MLX_DIR) clean
+	@$(MAKE) -C $(MLX_MAC_DIR) clean
 	@$(RM) -r $(OBJS_DIR)
 
 fclean : clean
