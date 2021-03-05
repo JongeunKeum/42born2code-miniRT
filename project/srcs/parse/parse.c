@@ -8,10 +8,19 @@ int	info_r(char	**info, t_scene *scene)
 	return (1);
 }
 
-// int	info_a(char **info, t_scene *scene)
-// {
+int	info_a(char **info, t_scene *scene)
+{
+	char		**element;
+	t_color3	color;
 
-// }
+	if (info[0][1] != '\0' || info[3] != NULL)
+		return (-1);
+	element = ft_split(info[2], ',');
+	color = color3(ft_atod(element[0]), ft_atod(element[1]), ft_atod(element[2]));
+	color = vdivide(color, 255.0);
+	scene->ambient = ambient(ft_atod(info[1]), color);
+	return (1);
+}
 
 int	info_c(char **info, t_scene *scene)
 {
@@ -179,8 +188,8 @@ int	handle_info(char **info, t_scene *scene)
 		return (-1);
 	if (info[0][0] == 'R')
 		info_r(info, scene);
-	// else if (info[0][0] == 'A')
-	// 	info_a(info, scene);
+	else if (info[0][0] == 'A')
+		info_a(info, scene);
 	else if (info[0][0] == 'c' && info[0][1] == '\0')
 		info_c(info, scene);
 	else if (info[0][0] == 'l')

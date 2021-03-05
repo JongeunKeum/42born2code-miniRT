@@ -8,6 +8,7 @@ t_scene	*scene_init()
 	scene = (t_scene *)malloc(sizeof(t_scene));
 	scene->world = NULL;
 	scene->light = NULL;
+	scene->camera = NULL;
 	return (scene);
 }
 
