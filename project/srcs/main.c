@@ -20,6 +20,7 @@ int main(int argc, char *argv[])
 	parse_rt(argv[1], vars.scene);
 	set_mlx(&vars);
 	rendering(&vars);
+	handle_hook(&vars);
 	mlx_loop(vars.mlx);
 	return (0);
 }
