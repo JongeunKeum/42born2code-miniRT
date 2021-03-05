@@ -41,8 +41,7 @@ static char		*get_arr(char const *s, char c, char *res, size_t idx)
 	len = 0;
 	while (s[idx + len] != c && s[idx + len] != '\0')
 		len++;
-	res = (char *)malloc(len + 1);
-	if (!res)
+	if (!(res = (char *)malloc(len + 1)))
 		return (NULL);
 	i = 0;
 	while (i < len)
