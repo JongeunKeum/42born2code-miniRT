@@ -12,6 +12,7 @@ typedef struct s_hit_record	t_hit_record;
 
 typedef struct s_camera		t_camera;
 typedef struct s_canvas		t_canvas;
+typedef struct s_ambient	t_ambient;
 typedef struct s_scene		t_scene;
 
 typedef struct s_object		t_object;
@@ -54,13 +55,13 @@ struct	s_vec3
 	double	z;
 };
 
-struct s_ray
+struct	s_ray
 {
 	t_point3	orig;
 	t_vec3		dir;
 };
 
-struct s_hit_record
+struct	s_hit_record
 {
 	t_point3	p;
 	t_vec3		normal;
@@ -71,7 +72,7 @@ struct s_hit_record
 	t_color3	albedo;
 };
 
-struct s_camera
+struct	s_camera
 {
 	t_point3	orig;
 	double		viewport_w;
@@ -82,24 +83,31 @@ struct s_camera
 	t_point3	left_bottom;
 };
 
-struct s_canvas
+struct	s_canvas
 {
 	int		width;
 	int		height;
 	double	aspect_ratio;
 };
 
-struct				s_scene
+struct	s_ambient
+{
+	double		ratio;
+	t_color3	ambient_color;
+};
+
+struct	s_scene
 {
 	t_canvas		canvas;
-	t_camera		camera;
+	t_camera		*camera;
+	t_ambient		ambient;
 	t_object		*world;
 	t_object		*light;
 	t_ray			ray;
 	t_hit_record	rec;
 };
 
-struct s_object
+struct	s_object
 {
 	t_object_type	type;
 	void			*element;
@@ -107,7 +115,7 @@ struct s_object
 	t_color3		albedo;
 };
 
-struct s_sphere
+struct	s_sphere
 {
 	t_point3	center;
 	double		diameter;

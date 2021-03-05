@@ -4,7 +4,8 @@
 # include "minirt.h"
 
 t_canvas	canvas(int	width, int height);
-t_camera	camera(t_canvas *canvas, t_point3 orig, t_vec3 normal, double degrees);
+t_camera	*camera(t_canvas *canvas, t_point3 orig, t_vec3 normal, double degrees);	
+t_ambient	ambient(double ratio, t_color3 ambient_color);
 t_object	*object(t_object_type type, void *element, t_color3 albedo);
 t_sphere	*sphere(t_point3 center, double diameter);
 t_plane		*plane(t_point3 center, t_vec3 normal);
