@@ -1,8 +1,6 @@
 #ifndef PARSE_H
 # define PARSE_H
 
-# include "minirt.h"
-
 int	parse_rt(char	*argv, t_scene *scene);
 int	handle_info(char **info, t_scene *scene);
 int	info_r(char	**info, t_scene *scene);

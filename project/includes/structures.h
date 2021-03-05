@@ -2,7 +2,6 @@
 # define STRUCTURES_H
 
 # define _USE_MATH_DEFINES
-# include "minirt.h"
 
 typedef struct s_vec3		t_vec3;
 typedef struct s_vec3		t_point3;
