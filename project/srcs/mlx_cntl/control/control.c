@@ -1,79 +1,54 @@
 #include "minirt.h"
-/*
-int		control_light(int keycode, t_vars *vars)
-{
-	if (keycode == KEY_T)
-		mlx_hook(vars->win, 2, 1L<<0, translate, vars);
-}
-*/
-int		translate_camera(int keycode, t_vars *vars)
-{
-	int	axis;
-	int	sign;
 
-	if (keycode == KEY_W)
-	{
-		axis = Y;
-		sign = PLUS;
-	}
-	else if (keycode == KEY_S)
-	{
-		axis = Y;
-		sign = MINUS;
-	}
-	else if (keycode == KEY_D)
-	{
-		axis = X;
-		sign = PLUS;
-	}
-	else if (keycode == KEY_A)
-	{
-		axis = X;
-		sign = MINUS;
-	}
-	else if (keycode == KEY_Z)
-	{
-		axis = Z;
-		sign = MINUS;
-	}
-	else if (keycode == KEY_X)
-	{
-		axis = Z;
-		sign = MINUS;
-	}
-	else if (keycode == KEY_Q)
-		return (0);
-	vars->scene->camera->orig = translate_center(vars->scene->camera->orig, axis, sign);
-	rendering(vars);
-	return (1);
+void	del_flag_in_selected(t_vars *vars)
+{
+	vars->mode->trans = OFF;
+	vars->mode->axis = OFF;
+	vars->mode->sign = OFF;
 }
 
-int		control_camera(int keycode, t_vars *vars)
+void	del_flag_in_trans(t_vars *vars)
 {
-	if (keycode == KEY_T)
-		mlx_hook(vars->win, 2, 1L<<0, translate_camera, vars);
-//	else if (keycode == KEY_R)
-
-//	else if (keycode == KEY_S)
-
-}
-
-int		select_scene(int keycode, t_vars *vars)
-{
-	if (keycode == KEY_L)
-		mlx_hook(vars->win, 2, 1L<<0, control_light, vars);
-	else if (keycode == KEY_C)
-		mlx_hook(vars->win, 2, 1L<<0, control_camera, vars);
-//	else if (keycode == KEY_O)
+	vars->mode->axis = OFF;
+	vars->mode->sign = OFF;
 }
 
 int		handle_keypress(int keycode, t_vars *vars)
 {
-	if (keycode == KEY_L || keycode == KEY_C || keycode == KEY_O)
-		select_scene(keycode, vars);
+	if (keycode == KEY_C || keycode == KEY_L)
+	{
+		if (keycode == KEY_C)
+			vars->mode->selected = CAM;
+		else if (keycode == KEY_L)
+			vars->mode->selected = LIGHT_POINT;
+		del_flag_in_selected(vars);
+	}
+	if ((keycode == KEY_T || keycode == KEY_R || keycode == KEY_S) && vars->mode->selected != OFF)
+	{
+		if (keycode == KEY_T && vars->mode->selected != OFF)
+			vars->mode->trans = TRANSLATE;
+		else if (keycode == KEY_R && vars->mode->selected != OFF)
+			vars->mode->trans = ROTATE;
+		else if (keycode == KEY_S && vars->mode->selected != OFF)
+			vars->mode->trans = SCALE; 
+		del_flag_in_trans(vars);
+	}
+	if (keycode == KEY_X || keycode == KEY_Y || keycode == KEY_Z)
+	{
+		check_err_in_axis(vars);
+		if (keycode == KEY_X)
+			vars->mode->axis = X;
+		else if (keycode == KEY_Y)
+			vars->mode->axis = Y;
+		else if (keycode == KEY_Z)
+			vars->mode->axis = Z;
+		vars->mode->sign = OFF;
+	}
+	return (1);
 }
 
 void	handle_hook(t_vars *vars)
 {
+	vars->mode = (t_mode *)malloc(sizeof(t_mode));
 	mlx_hook(vars->win, 2, 1L<<0, handle_keypress, vars);
 }

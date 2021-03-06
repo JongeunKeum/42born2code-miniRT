@@ -38,7 +38,8 @@ int	info_c(char **info, t_scene *scene)
 	normal = point3(ft_atod(element[0]), ft_atod(element[1]), ft_atod(element[2]));
 	free(element);
 	degrees = ft_atod(info[3]);
-	scene->camera = camera(&scene->canvas, orig, normal, degrees);
+	oadd(&scene->camera, object(CAM, camera(&scene->canvas, orig, normal, degrees), color3(0, 0, 0)));
+	scene->camera_cnt++;
 	return (1);
 }
 
@@ -60,6 +61,7 @@ int	info_l(char **info, t_scene *scene)
 	free(element);
 	color = vdivide(color, 255.0);
 	oadd(&scene->light, object(LIGHT_POINT, light_point(position, color, bright_ratio), color3(0, 0, 0)));
+	scene->light_cnt++;
 	return (1);
 }
 

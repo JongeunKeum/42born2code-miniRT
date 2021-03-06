@@ -9,6 +9,8 @@ t_scene	*scene_init()
 	scene->world = NULL;
 	scene->light = NULL;
 	scene->camera = NULL;
+	scene->camera_cnt = 0;
+	scene->light_cnt = 0;
 	return (scene);
 }
 
