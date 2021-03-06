@@ -1,7 +1,7 @@
 NAME = miniRT
 
 CC = gcc
-CFLAGS = -g3 -fsanitize=address #-Wall -Wextra -Werror
+# CFLAGS = -g3 -fsanitize=address #-Wall -Wextra -Werror
 AR = ar
 ARFLAGS = rc
 
@@ -11,6 +11,7 @@ SRCS = ./srcs/main.c 						\
 	   ./srcs/mlx_cntl/rendering.c			\
 	   ./srcs/mlx_cntl/set_mlx.c			\
 	   ./srcs/mlx_cntl/color.c				\
+	   ./srcs/mlx_cntl/control/control.c	\
 	   ./srcs/parse/parse.c					\
 	   ./srcs/parse/parse_utils.c			\
 	   ./srcs/scene/camera.c				\
@@ -31,14 +32,15 @@ SRCS = ./srcs/main.c 						\
 	   ./srcs/trace/trans/translate.c		\
 	   ./srcs/utils/object_utils.c			\
 	   ./srcs/utils/vec3_utils.c
-SRCS_DIR = ./srcs				\
-		   ./srcs/gnl			\
-		   ./srcs/mlx_cntl		\
-		   ./srcs/parse			\
-		   ./srcs/scene			\
-		   ./srcs/trace/hit		\
-		   ./srcs/trace/ray		\
-		   ./srcs/trace/trans	\
+SRCS_DIR = ./srcs					\
+		   ./srcs/gnl				\
+		   ./srcs/mlx_cntl			\
+		   ./srcs/mlx_cntl/control	\
+		   ./srcs/parse				\
+		   ./srcs/scene				\
+		   ./srcs/trace/hit			\
+		   ./srcs/trace/ray			\
+		   ./srcs/trace/trans		\
 		   ./srcs/utils
 
 OBJS_DIR = ./objs
