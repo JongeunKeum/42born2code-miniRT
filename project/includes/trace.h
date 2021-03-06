@@ -19,4 +19,8 @@ t_bool		hit_cylinder(t_object *cy_obj, t_ray *ray, t_hit_record *rec);
 t_bool		hit_square(t_object *sq_obj, t_ray *ray, t_hit_record *rec);
 void		set_face_normal(t_ray *r, t_hit_record *rec);
 
+void		translate(t_object *obj, int axis, int sign);
+t_point3	translate_center(t_point3 center, int axis, int sign);
+void		translate_tr(t_object *obj, int axis, int sign);
+
 #endif

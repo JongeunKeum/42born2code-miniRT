@@ -24,6 +24,7 @@ typedef struct s_light		t_light;
 
 typedef struct s_img		t_img;
 typedef struct s_vars		t_vars;
+typedef struct s_mode		t_mode;
 
 typedef int					t_bool;
 # define FALSE 0
@@ -37,12 +38,18 @@ typedef int					t_bool;
 # define THETA (M_PI / (double)18)
 
 typedef int					t_object_type;
-# define SP 0
-# define LIGHT_POINT 1
+# define SP 1
 # define PL 2
 # define TR 3
 # define CY 4
 # define SQ 5
+# define CAM 6
+# define LIGHT_POINT 7
+
+# define OFF 0
+# define TRANSLATE 1
+# define ROTATE 2
+# define SCALE 3
 
 # define EPSILON 1e-6
 # define LUMEN 3
@@ -98,12 +105,14 @@ struct	s_ambient
 struct	s_scene
 {
 	t_canvas		canvas;
-	t_camera		*camera;
+	t_object		*camera;
 	t_ambient		ambient;
 	t_object		*world;
 	t_object		*light;
 	t_ray			ray;
 	t_hit_record	rec;
+	int				camera_cnt;
+	int				light_cnt;
 };
 
 struct	s_object
@@ -160,19 +169,30 @@ struct s_light
 	double		bright_ratio;
 };
 
-struct  s_vars {
+struct  s_vars
+{
 	void	*mlx;
 	void	*win;
 	t_scene	*scene;
 	t_img	*img;
+	t_mode	*mode;
 };
 
-struct s_img {
+struct	s_img
+{
 	void	*img;
 	char	*addr;
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
+};
+
+struct	s_mode
+{
+	t_object_type	selected;
+	int				trans;
+	int				axis;
+	int				sign;
 };
 
 #endif
