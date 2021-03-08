@@ -45,6 +45,7 @@ typedef int					t_object_type;
 # define SQ 5
 # define CAM 6
 # define LIGHT_POINT 7
+# define OBJECT 8
 
 # define OFF 0
 # define TRANSLATE 1
@@ -81,6 +82,7 @@ struct	s_hit_record
 struct	s_camera
 {
 	t_point3	orig;
+	t_vec3		normal;
 	double		viewport_w;
 	double		viewport_h;
 	t_vec3		horizontal;
@@ -111,8 +113,6 @@ struct	s_scene
 	t_object		*light;
 	t_ray			ray;
 	t_hit_record	rec;
-	int				camera_cnt;
-	int				light_cnt;
 };
 
 struct	s_object
@@ -120,6 +120,7 @@ struct	s_object
 	t_object_type	type;
 	void			*element;
 	void			*next;
+	void			*pre;
 	t_color3		albedo;
 };
 
@@ -171,11 +172,12 @@ struct s_light
 
 struct  s_vars
 {
-	void	*mlx;
-	void	*win;
-	t_scene	*scene;
-	t_img	*img;
-	t_mode	*mode;
+	void		*mlx;
+	void		*win;
+	t_scene		*scene;
+	t_img		*img;
+	t_mode		*mode;
+	t_object	*cur;
 };
 
 struct	s_img
