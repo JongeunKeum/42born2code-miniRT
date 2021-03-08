@@ -54,51 +54,42 @@ t_vec3	rotate_y(t_vec3 normal, int sign)
 	return (result);
 }
 
-void	rotate_pl(t_object *obj, int axis, int sign)
+vec3	rotate_normal(t_vec3 normal, int axis, int sign)
 {
-	t_plane	*pl;
-
-	pl = obj->element;
 	if (axis == X)
-		pl->normal = rotate_x(pl->normal, sign);
+		normal = rotate_x(normal, sign);
 	else if (axis == Y)
-		pl->normal = rotate_y(pl->normal, sign);
+		normal = rotate_y(normal, sign);
 	else if (axis == Z)
-		pl->normal = rotate_z(pl->normal, sign);
-}
-
-void	rotate_cy(t_object *obj, int axis, int sign)
-{
-	t_cylinder	*cy;
-
-	cy = obj->element;
-	if (axis == X)
-		cy->normal = rotate_x(cy->normal, sign);
-	else if (axis == Y)
-		cy->normal = rotate_y(cy->normal, sign);
-	else if (axis == Z)
-		cy->normal = rotate_z(cy->normal, sign);
-}
-
-void	rotate_sq(t_object *obj, int axis, int sign)
-{
-	t_square	*sq;
-
-	sq = obj->element;
-	if (axis == X)
-		sq->normal = rotate_x(sq->normal, sign);
-	else if (axis == Y)
-		sq->normal = rotate_y(sq->normal, sign);
-	else if (axis == Z)
-		sq->normal = rotate_z(sq->normal, sign);
+		normal = rotate_z(normal, sign);
+	return (normal);
 }
 
 void	rotate(t_object *obj, int axis, int sign)
 {
+	t_plane		*pl;
+	t_cylinder	*cy;
+	t_square	*sq;
+	t_camera	*cam;
+
 	if (obj->type == PL)
-		rotate_pl(obj, axis, sign);
+	{
+		pl = obj->element;
+		pl->normal = rotate_normal(pl->normal, axis, sign);
+	}
 	else if (obj->type == CY)
-		rotate_cy(obj, axis, sign);
+	{
+		cy = obj->element;
+		cy->normal = rotate_normal(cy->normal, axis, sign);
+	}
 	else if (obj->type == SQ)
-		rotate_sq(obj, axis, sign);
+	{
+		sq = obj->element;
+		sq->normal = rotate_normal(sq->normal, axis, sign);
+	}
+	else if (obj->type == CAM)
+	{
+		cam = obj->element;
+		cam->normal = rotate_normal(cam->normal, axis, sign);
+	}
 }

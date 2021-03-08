@@ -16,7 +16,7 @@ void	rendering(t_vars *vars)
 		{
 			u = (double)i / (vars->scene->canvas.width - 1);
 			v = (double)j / (vars->scene->canvas.height - 1);
-			vars->scene->ray = ray_primary(vars->scene->camera, u, v);
+			vars->scene->ray = ray_primary(vars->scene->camera->element, u, v);
 			rgb = create_rgb(ray_color(vars->scene));
 			my_mlx_pixel_put(vars->img, vars->scene->canvas.width - i - 1, vars->scene->canvas.height - j - 1, rgb);
 			i++;

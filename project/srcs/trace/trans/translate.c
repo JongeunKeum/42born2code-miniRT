@@ -78,6 +78,8 @@ void    translate(t_object *obj, int axis, int sign)
 	t_plane		*pl;
 	t_cylinder	*cy;
 	t_square	*sq;
+	t_light		*li;
+	t_camera	*cam;
 
     if (obj->type == SP)
 	{
@@ -100,5 +102,15 @@ void    translate(t_object *obj, int axis, int sign)
 	{
 		sq = obj->element;
 		sq->center = translate_center(sq->center, axis, sign);
+	}
+	else if (obj->type == LIGHT_POINT)
+	{
+		li = obj->element;
+		li->origin = translate_center(li->origin, axis, sign);
+	}
+	else if (obj->type == CAM)
+	{
+		cam = obj->element;
+		cam->orig = translate_center(cam->orig, axis, sign);
 	}
 }
