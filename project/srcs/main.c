@@ -9,6 +9,8 @@ t_scene	*scene_init()
 	scene->world = NULL;
 	scene->light = NULL;
 	scene->camera = NULL;
+	scene->min_width = 480;
+	scene->min_height = 480;
 	return (scene);
 }
 
@@ -25,6 +27,7 @@ int		check_input_file(char *argv)
 
 void	minirt(char *argv, t_vars *vars)
 {
+	mlx_get_screen_size(vars->mlx, &vars->scene->max_width, &vars->scene->max_height);
 	parse_rt(argv, vars->scene);
 	set_mlx(vars);
 	rendering(vars);

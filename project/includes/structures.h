@@ -113,6 +113,10 @@ struct	s_scene
 	t_object		*light;
 	t_ray			ray;
 	t_hit_record	rec;
+	int				max_width;
+	int				max_height;
+	int				min_width;
+	int				min_height;
 };
 
 struct	s_object
