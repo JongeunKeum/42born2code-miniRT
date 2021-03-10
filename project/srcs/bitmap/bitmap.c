@@ -1,6 +1,14 @@
 #include "minirt.h"
 
-void	set_bitmap_file(t_vars *vars, int fd)
+void	set_mlx_bmp(t_vars *vars)
+{
+	vars->img = (t_img *)malloc(sizeof(t_img));
+	vars->mlx = mlx_init();
+	vars->img->img = mlx_new_image(vars->mlx, vars->scene->canvas.width, vars->scene->canvas.height);
+	vars->img->addr = mlx_get_data_addr(vars->img->img, &vars->img->bits_per_pixel, &vars->img->line_length, &vars->img->endian);
+}
+
+void	set_bitmap(t_vars *vars, int fd)
 {
 	int		tmp;
 	char	bmp_file[14];
@@ -62,7 +70,7 @@ void	save_bitmap(t_vars *vars)
 	unsigned int	*img;
 
 	fd = open("./image.bmp", O_WRONLY | O_CREAT | O_TRUNC, 0666);
-	set_bitmap_file(vars, fd);
+	set_bitmap(vars, fd);
 	rendering_bmp(vars, fd);
 	img = (unsigned int *)vars->img->addr;
 	j = -1;
@@ -73,4 +81,11 @@ void	save_bitmap(t_vars *vars)
 			write(fd, img + (j * vars->img->line_length / 4) + i, vars->img->bits_per_pixel / 8);
 	}
 	close(fd);
+}
+
+void	bitmap(char *str, t_vars *vars)
+{
+	parse_rt(str, vars->scene);
+	set_mlx_bmp(vars);
+	save_bitmap(vars);
 }
