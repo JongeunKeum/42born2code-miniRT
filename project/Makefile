@@ -30,6 +30,7 @@ SRCS = ./srcs/main.c 						\
 	   ./srcs/trace/trans/rotate.c			\
 	   ./srcs/trace/trans/scale.c			\
 	   ./srcs/trace/trans/translate.c		\
+	   ./srcs/bitmap/bitmap.c				\
 	   ./srcs/utils/object_utils.c			\
 	   ./srcs/utils/vec3_utils.c
 SRCS_DIR = ./srcs					\
@@ -41,6 +42,7 @@ SRCS_DIR = ./srcs					\
 		   ./srcs/trace/hit			\
 		   ./srcs/trace/ray			\
 		   ./srcs/trace/trans		\
+		   ./srcs/bitmap			\
 		   ./srcs/utils
 
 OBJS_DIR = ./objs

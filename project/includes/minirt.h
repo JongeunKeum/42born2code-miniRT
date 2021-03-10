@@ -13,6 +13,7 @@
 # include "mlx_cntl.h"
 # include "trace.h"
 # include "trans.h"
+# include "bitmap.h"
 # include "get_next_line.h"
 # include "libft.h"
 # include "key_macos.h"
