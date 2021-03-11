@@ -7,6 +7,9 @@
 # define B_BLUE "\e[0;104m"
 # define U_WHT "\e[4;37m"
 # define B_PRPL "\e[0;105m"
+# define C_YLW "\e[0;33m"
+# define C_RESET "\e[0m"
+# define C_RED "\033[31m"
 
 void	top_bottom_panel();
 void	selected_light(void);
