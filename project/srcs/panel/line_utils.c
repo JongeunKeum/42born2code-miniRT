@@ -1,6 +1,4 @@
-#include <stdio.h>
-#define C_YLW "\e[0;33m"
-#define C_RESET "\e[0m"
+#include "minirt.h"
 
 void	top_bottom_panel(void)
 {
@@ -11,13 +9,19 @@ void	top_bottom_panel(void)
 	printf("\n");
 }
 
-void	next_previous_panel(void)
+void	next_previous_panel(int selected)
 {
 	printf("+----------------------------------------------+\n");
 	printf("#   ");
-	printf("%s<-previous", C_YLW);
+	if (selected == OFF)
+		printf("<-previous");
+	else
+		printf("%s<-previous", C_YLW);
 	printf("%s\t\t\t      ", C_RESET);
-	printf("%snext->", C_YLW);
+	if (selected == OFF)
+		printf("next->");
+	else
+		printf("%snext->", C_YLW);
 	printf("%s   #\n", C_RESET);
 	printf(":----------------------------------------------:\n");
 }

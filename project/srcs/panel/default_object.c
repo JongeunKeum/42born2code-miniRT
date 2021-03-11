@@ -1,6 +1,4 @@
-#include <stdio.h>
-#define B_WHT "\e[47m"
-#define B_RESET "\e[0m"
+#include "minirt.h"
 
 static void	line_one_three(void)
 {
