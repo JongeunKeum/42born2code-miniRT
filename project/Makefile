@@ -31,6 +31,13 @@ SRCS = ./srcs/main.c 						\
 	   ./srcs/trace/trans/scale.c			\
 	   ./srcs/trace/trans/translate.c		\
 	   ./srcs/bitmap/bitmap.c				\
+	   ./srcs/panel/print_panel.c			\
+	   ./srcs/panel/object_panel.c			\
+	   ./srcs/panel/selected_light.c		\
+	   ./srcs/panel/default_object.c		\
+	   ./srcs/panel/transform_panel.c		\
+	   ./srcs/panel/axis_panel.c			\
+	   ./srcs/panel/line_utils.c			\
 	   ./srcs/utils/object_utils.c			\
 	   ./srcs/utils/vec3_utils.c
 SRCS_DIR = ./srcs					\
@@ -43,6 +50,7 @@ SRCS_DIR = ./srcs					\
 		   ./srcs/trace/ray			\
 		   ./srcs/trace/trans		\
 		   ./srcs/bitmap			\
+		   ./srcs/panel				\
 		   ./srcs/utils
 
 OBJS_DIR = ./objs
