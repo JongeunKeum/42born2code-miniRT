@@ -37,7 +37,8 @@ static void	line_four_six(void)
 	printf("%s   ", B_WHT);
 	printf("%s\t       ", B_RESET);
 	printf("%s  ", B_WHT);
-	printf("%s      #\n", B_RESET);
+	printf("%s      +\n", B_RESET);
+	printf("#\t\t\t\t\t       #\n");
 	printf(":\t\t\t\t\t       :\n");
 }
 
