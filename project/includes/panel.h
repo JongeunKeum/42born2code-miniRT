@@ -11,6 +11,7 @@
 # define C_RESET "\e[0m"
 # define C_RED "\033[31m"
 
+void	print_panel(t_vars *vars);
 void	top_bottom_panel();
 void	selected_light(void);
 void	default_object(void);
