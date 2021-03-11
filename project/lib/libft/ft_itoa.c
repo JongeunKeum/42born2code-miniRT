@@ -6,7 +6,7 @@
 /*   By: jkeum <jkeum@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/09 09:33:39 by jkeum             #+#    #+#             */
-/*   Updated: 2020/10/09 19:02:20 by jkeum            ###   ########.fr       */
+/*   Updated: 2021/03/11 18:54:55 by jkeum            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static size_t	n_len(int n)
 	return (len);
 }
 
-static char		*ft_strrev(char *str)
+static char		*ft_strreverse(char *str)
 {
 	size_t	i;
 	size_t	len;
@@ -60,7 +60,7 @@ static char		*get_arr(char *res, int n, size_t len, size_t sign)
 		}
 		if (sign == 1)
 			res[i] = '-';
-		res = ft_strrev(res);
+		res = ft_strreverse(res);
 	}
 	return (res);
 }

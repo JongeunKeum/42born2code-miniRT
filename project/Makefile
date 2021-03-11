@@ -14,6 +14,7 @@ SRCS = ./srcs/main.c 						\
 	   ./srcs/mlx_cntl/control/control.c	\
 	   ./srcs/parse/parse.c					\
 	   ./srcs/parse/parse_utils.c			\
+	   ./srcs/parse/parse_err.c				\
 	   ./srcs/scene/camera.c				\
 	   ./srcs/scene/canvas.c				\
 	   ./srcs/scene/ambient.c				\
@@ -71,23 +72,23 @@ all : $(NAME)
 
 $(NAME) : $(OBJS)
 	@$(MAKE) -C $(LIBFT_DIR)
-	@$(MAKE) -C $(MLX_DIR)
-#	@$(MAKE) -C $(MLX_MAC_DIR)
-#	@$(CC) $(CFLAGS) -o $@ $^ -L$(LIBFT_DIR) -lft -L$(MLX_MAC_DIR) -lmlx
-#	@install_name_tool -change $(MLX) $(MLX_MAC_DIR)/$(MLX) $(NAME)
-	@$(CC) $(CFLAGS) -o $@ $^ -L$(LIBFT_DIR) -lft -L$(MLX_DIR) -lmlx -lXext -lX11 -lm -lbsd
+#	@$(MAKE) -C $(MLX_DIR)
+	@$(MAKE) -C $(MLX_MAC_DIR)
+	@$(CC) $(CFLAGS) -o $@ $^ -L$(LIBFT_DIR) -lft -L$(MLX_MAC_DIR) -lmlx
+	@install_name_tool -change $(MLX) $(MLX_MAC_DIR)/$(MLX) $(NAME)
+#	@$(CC) $(CFLAGS) -o $@ $^ -L$(LIBFT_DIR) -lft -L$(MLX_DIR) -lmlx -lXext -lX11 -lm -lbsd
 
 $(OBJS_DIR)/%.o : %.c
 	@mkdir -p $(OBJS_DIR)
-	@$(CC) $(CFLAGS) -o $@ -I$(INC) -I$(LIBFT_DIR) -I$(MLX_DIR) -c $<
-#	@$(CC) $(CFLAGS) -o $@ -I$(INC) -I$(LIBFT_DIR) -I$(MLX_MAC_DIR) -c $<
+#	@$(CC) $(CFLAGS) -o $@ -I$(INC) -I$(LIBFT_DIR) -I$(MLX_DIR) -c $<
+	@$(CC) $(CFLAGS) -o $@ -I$(INC) -I$(LIBFT_DIR) -I$(MLX_MAC_DIR) -c $<
 
 bonus : all
 
 clean :
 	@$(MAKE) -C $(LIBFT_DIR) fclean
-	@$(MAKE) -C $(MLX_DIR) clean
-#	@$(MAKE) -C $(MLX_MAC_DIR) clean
+#	@$(MAKE) -C $(MLX_DIR) clean
+	@$(MAKE) -C $(MLX_MAC_DIR) clean
 	@$(RM) -r $(OBJS_DIR)
 
 fclean : clean

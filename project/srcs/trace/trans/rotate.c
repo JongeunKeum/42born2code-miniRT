@@ -54,7 +54,7 @@ t_vec3	rotate_y(t_vec3 normal, int sign)
 	return (result);
 }
 
-vec3	rotate_normal(t_vec3 normal, int axis, int sign)
+t_vec3	rotate_normal(t_vec3 normal, int axis, int sign)
 {
 	if (axis == X)
 		normal = rotate_x(normal, sign);

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   structures.h                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jkeum <jkeum@student.42seoul.kr>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/03/11 18:21:24 by jkeum             #+#    #+#             */
+/*   Updated: 2021/03/11 18:23:08 by jkeum            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef STRUCTURES_H
 # define STRUCTURES_H
 
@@ -136,13 +148,13 @@ struct	s_sphere
 	double		radius2;
 };
 
-struct s_plane
+struct	s_plane
 {
 	t_point3	center;
 	t_vec3		normal;
 };
 
-struct s_triangle
+struct	s_triangle
 {
 	t_point3	p0;
 	t_point3	p1;
@@ -150,7 +162,7 @@ struct s_triangle
 	t_vec3		normal;
 };
 
-struct s_cylinder
+struct	s_cylinder
 {
 	t_point3	center;
 	t_vec3		normal;
@@ -160,14 +172,14 @@ struct s_cylinder
 	double		height;
 };
 
-struct s_square
+struct	s_square
 {
 	t_point3	center;
 	t_vec3		normal;
 	double		length;
 };
 
-struct s_light
+struct	s_light
 {
 	t_point3	origin;
 	t_color3	light_color;

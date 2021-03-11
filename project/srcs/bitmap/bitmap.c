@@ -1,11 +1,24 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   bitmap.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jkeum <jkeum@student.42seoul.kr>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/03/11 18:25:30 by jkeum             #+#    #+#             */
+/*   Updated: 2021/03/11 18:53:27 by jkeum            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minirt.h"
 
-void	set_mlx_bmp(t_vars *vars)
+int		set_mlx_bmp(t_vars *vars)
 {
-	vars->img = (t_img *)malloc(sizeof(t_img));
-	vars->mlx = mlx_init();
+	if (!(vars->img = (t_img *)malloc(sizeof(t_img))))
+		return (0);
 	vars->img->img = mlx_new_image(vars->mlx, vars->scene->canvas.width, vars->scene->canvas.height);
 	vars->img->addr = mlx_get_data_addr(vars->img->img, &vars->img->bits_per_pixel, &vars->img->line_length, &vars->img->endian);
+	return (1);
 }
 
 void	set_bitmap(t_vars *vars, int fd)
@@ -21,7 +34,7 @@ void	set_bitmap(t_vars *vars, int fd)
 	ft_memmove(&bmp_file[2], &tmp, 4);
 	tmp = 54;
 	ft_memmove(&bmp_file[10], &tmp, 4);
-	write(ft, bmp_file, 14);
+	write(fd, bmp_file, 14);
 	tmp = 40;
 	ft_memmove(&bmp_info[0], &tmp, 4);
 	ft_memmove(&bmp_info[4], &vars->scene->canvas.width, 4);
@@ -71,7 +84,7 @@ void	save_bitmap(t_vars *vars)
 
 	fd = open("./image.bmp", O_WRONLY | O_CREAT | O_TRUNC, 0666);
 	set_bitmap(vars, fd);
-	rendering_bmp(vars, fd);
+	rendering_bmp(vars);
 	img = (unsigned int *)vars->img->addr;
 	j = -1;
 	while (++j < vars->scene->canvas.height)
@@ -83,9 +96,14 @@ void	save_bitmap(t_vars *vars)
 	close(fd);
 }
 
-void	bitmap(char *str, t_vars *vars)
+int		bitmap(char *str, t_vars *vars)
 {
-	parse_rt(str, vars->scene);
-	set_mlx_bmp(vars);
+	vars->mlx = mlx_init();
+	mlx_get_screen_size(vars->mlx, &vars->scene->max_width, &vars->scene->max_height);
+	if (!(parse_rt(str, vars->scene)))
+		return (0);
+	if (!(set_mlx_bmp(vars)))
+		return (-1);
 	save_bitmap(vars);
+	return (1);
 }
