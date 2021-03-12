@@ -1,6 +1,6 @@
 #include "minirt.h"
 
-t_ray		ray(t_point3 orig, t_vec3 dir)
+t_ray			ray(t_point3 orig, t_vec3 dir)
 {
 	t_ray	ray;
 
@@ -9,12 +9,14 @@ t_ray		ray(t_point3 orig, t_vec3 dir)
 	return (ray);
 }
 
-t_ray		ray_primary(t_camera *cam, double u, double v)
+t_ray			ray_primary(t_camera *cam, double u, double v)
 {
 	t_ray	ray;
 
 	ray.orig = cam->orig;
-	ray.dir = vunit(vminus(vplus(vplus(cam->left_bottom, vmult(cam->horizontal, u)), vmult(cam->vertical, v)), cam->orig));
+	ray.dir = vunit(vminus(vplus(vplus(cam->left_bottom,
+						vmult(cam->horizontal, u)), vmult(cam->vertical, v)),
+				cam->orig));
 	return (ray);
 }
 
@@ -37,7 +39,7 @@ t_hit_record	record_init(void)
 
 t_color3		ray_color(t_scene *scene)
 {
-	double			t;
+	double	t;
 
 	scene->rec = record_init();
 	if (hit(scene->world, &scene->ray, &scene->rec))
@@ -45,6 +47,7 @@ t_color3		ray_color(t_scene *scene)
 	else
 	{
 		t = 0.5 * (scene->ray.dir.y + 1.0);
-		return (vplus(vmult(color3(1, 1, 1), 1.0 - t), vmult(color3(0.5, 0.7, 1.0), t)));
+		return (vplus(vmult(color3(1, 1, 1), 1.0 - t),
+					vmult(color3(0.5, 0.7, 1.0), t)));
 	}
 }

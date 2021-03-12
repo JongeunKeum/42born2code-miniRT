@@ -3,42 +3,27 @@
 t_bool	hit_sphere(t_object *sp_obj, t_ray *ray, t_hit_record *rec)
 {
 	t_sphere	*sp;
-	t_vec3		oc;
-	double		a;
-	double		half_b;
-	double		c;
-	double		discriminant;
-	double		sqrtd;
-	double		root;
 
 	sp = sp_obj->element;
 	sp->radius = sp->diameter / 2;
-	sp->radius2 = pow(sp->radius, 2);
-	oc = vminus(ray->orig, sp->center);
-	a = vdot(ray->dir, ray->dir);	/*	vlength2(ray->dir);	*/
-	half_b = vdot(oc, ray->dir);	/*	Formula for even roots	*/
-	c = vdot(oc, oc) - sp->radius2;	/*	vlength2(oc) - sp->radius2;	*/
-	discriminant = half_b * half_b - a * c;
-	if (discriminant < 0)
+	sp->oc = vminus(ray->orig, sp->center);
+	sp->a = vdot(ray->dir, ray->dir);
+	sp->half_b = vdot(sp->oc, ray->dir);
+	sp->c = vdot(sp->oc, sp->oc) - sp->radius * sp->radius;
+	sp->discriminant = sp->half_b * sp->half_b - sp->a * sp->c;
+	if (sp->discriminant < 0)
 		return (FALSE);
-	sqrtd = sqrt(discriminant);
-	/*	Checks whether there is a root
-		between tmin and tmax among two real roots(t),
-		and checks the smaller root first	*/
-	root = (-half_b - sqrtd) / a;
-	if (root < rec->tmin || rec->tmax < root)
+	sp->sqrtd = sqrt(sp->discriminant);
+	sp->root = (-sp->half_b - sp->sqrtd) / sp->a;
+	if (sp->root < rec->tmin || rec->tmax < sp->root)
 	{
-		root = (-half_b + sqrtd) / a;
-		if (root < rec->tmin || rec->tmax < root)
+		sp->root = (-sp->half_b + sp->sqrtd) / sp->a;
+		if (sp->root < rec->tmin || rec->tmax < sp->root)
 			return (FALSE);
 	}
-	rec->t = root;
-	rec->p = ray_at(ray, root);
-	/*	normalized normal vector	*/
+	rec->t = sp->root;
+	rec->p = ray_at(ray, sp->root);
 	rec->normal = vdivide(vminus(rec->p, sp->center), sp->radius);
-	/*	The normal vector of rec and the direction vector of the ray
-		are compared and stored as t_bool value,
-		whether it is the front or the back.	*/
 	set_face_normal(ray, rec);
 	rec->albedo = sp_obj->albedo;
 	return (TRUE);

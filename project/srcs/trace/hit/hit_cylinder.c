@@ -1,62 +1,58 @@
 #include "minirt.h"
 
-t_bool	hit_cylinder(t_object *cy_obj, t_ray *ray, t_hit_record *rec)
+static int	check_root(t_cylinder *cy, t_ray *ray, t_hit_record *rec)
 {
-	t_cylinder	*cy;
-	t_point3	h;
-	t_vec3		h_unit;
-	t_vec3		co;	
-	t_point3	p;
-	double		a;
-	double		half_b;
-	double		c;
-	double		discriminant;
-	double		sqrtd;
-	double		root;
-	double		h_range;
-
-	cy = cy_obj->element;
-	cy->radius = cy->diameter / 2;
-	cy->radius2 = cy->radius * cy->radius;
-	h_unit = vunit(cy->normal);
-	h = vplus(cy->center, vmult(h_unit, cy->height));
-	co = vminus(ray->orig, cy->center);
-	a = vdot(ray->dir, ray->dir) - pow(vdot(ray->dir, h_unit), 2);
-	half_b = vdot(ray->dir, co) - (vdot(ray->dir, h_unit) * vdot(co, h_unit));
-	c = vdot(co, co) - pow(vdot(co, h_unit), 2) - cy->radius2;
-	discriminant = half_b * half_b - a * c;
-	if (discriminant < 0)
-		return (FALSE);
-	sqrtd = sqrt(discriminant);
-	root = (-half_b - sqrtd) / a;
-	if (root < rec->tmin || rec->tmax < root)
+	cy->root = (-cy->half_b - cy->sqrtd) / cy->a;
+	if (cy->root < rec->tmin || rec->tmax < cy->root)
 	{
-		root = (-half_b + sqrtd) / a;
-		if (root < rec->tmin || rec->tmax < root)
-			return (FALSE);
-		p = ray_at(ray, root);
-		h_range = vdot(vminus(p, cy->center), h_unit);
-		if (h_range < 0 || h_range > cy->height)
-			return (FALSE);
+		cy->root = (-cy->half_b + cy->sqrtd) / cy->a;
+		if (cy->root < rec->tmin || rec->tmax < cy->root)
+			return (0);
+		cy->h_len = vdot(vminus(ray_at(ray, cy->root), cy->center), cy->h_unit);
+		if (cy->h_len < 0 || cy->h_len > cy->height)
+			return (0);
 	}
 	else
 	{
-		p = ray_at(ray, root);
-		h_range = vdot(vminus(p, cy->center), h_unit);
-		if (h_range < 0 || h_range > cy->height)
+		cy->h_len = vdot(vminus(ray_at(ray, cy->root), cy->center), cy->h_unit);
+		if (cy->h_len < 0 || cy->h_len > cy->height)
 		{
-			root = (-half_b + sqrtd) / a;
-			if (root < rec->tmin || rec->tmax < root)
-				return (FALSE);
-			p = ray_at(ray, root);
-			h_range = vdot(vminus(p, cy->center), h_unit);
-			if (h_range < 0 || h_range > cy->height)
-				return (FALSE);
+			cy->root = (-cy->half_b + cy->sqrtd) / cy->a;
+			if (cy->root < rec->tmin || rec->tmax < cy->root)
+				return (0);
+			cy->h_len = vdot(vminus(ray_at(ray, cy->root), cy->center),
+					cy->h_unit);
+			if (cy->h_len < 0 || cy->h_len > cy->height)
+				return (0);
 		}
 	}
-	rec->t = root;
-	rec->p = p;
-	rec->normal = vdivide(vminus(p, vplus(cy->center, vmult(h_unit, h_range))), cy->radius);
+	return (1);
+}
+
+t_bool		hit_cylinder(t_object *cy_obj, t_ray *ray, t_hit_record *rec)
+{
+	t_cylinder	*cy;
+
+	cy = cy_obj->element;
+	cy->radius = cy->diameter / 2;
+	cy->h_unit = vunit(cy->normal);
+	cy->h = vplus(cy->center, vmult(cy->h_unit, cy->height));
+	cy->co = vminus(ray->orig, cy->center);
+	cy->a = vdot(ray->dir, ray->dir) - pow(vdot(ray->dir, cy->h_unit), 2);
+	cy->half_b = vdot(ray->dir, cy->co) - (vdot(ray->dir, cy->h_unit)
+			* vdot(cy->co, cy->h_unit));
+	cy->c = vdot(cy->co, cy->co) - pow(vdot(cy->co, cy->h_unit), 2)
+		- cy->radius * cy->radius;
+	cy->discriminant = cy->half_b * cy->half_b - cy->a * cy->c;
+	if (cy->discriminant < 0)
+		return (FALSE);
+	cy->sqrtd = sqrt(cy->discriminant);
+	if (!(check_root(cy, ray, rec)))
+		return (FALSE);
+	rec->t = cy->root;
+	rec->p = ray_at(ray, cy->root);
+	rec->normal = vdivide(vminus(rec->p, vplus(cy->center,
+					vmult(cy->h_unit, cy->h_len))), cy->radius);
 	set_face_normal(ray, rec);
 	rec->albedo = cy_obj->albedo;
 	return (TRUE);

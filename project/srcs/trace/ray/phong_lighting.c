@@ -10,7 +10,8 @@ t_color3	phong_lighting(t_scene *scene)
 	while (lights)
 	{
 		if (lights->type == LIGHT_POINT)
-			light_color = vplus(light_color, point_light_get(scene, lights->element));
+			light_color = vplus(light_color,
+					point_light_get(scene, lights->element));
 		lights = lights->next;
 	}
 	return (vmin(vmult_(light_color, scene->rec.albedo), color3(1, 1, 1)));

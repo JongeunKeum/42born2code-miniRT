@@ -14,7 +14,5 @@
 # define BITMAP_H
 
 int		bitmap(char *argv, t_vars *vars);
-void	save_bitmap(t_vars *vars);
-int		set_mlx_bmp(t_vars *vars);
 
 #endif

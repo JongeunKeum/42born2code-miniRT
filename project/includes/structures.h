@@ -145,7 +145,13 @@ struct	s_sphere
 	t_point3	center;
 	double		diameter;
 	double		radius;
-	double		radius2;
+	double		a;
+	double		half_b;
+	double		c;
+	t_vec3		oc;
+	double		discriminant;
+	double		sqrtd;
+	double		root;
 };
 
 struct	s_plane
@@ -160,6 +166,14 @@ struct	s_triangle
 	t_point3	p1;
 	t_point3	p2;
 	t_vec3		normal;
+	t_vec3		edge0;
+	t_vec3		edge1;
+	t_vec3		edge2;
+	t_vec3		n;
+	t_point3	p;
+	double		denominator;
+	double		d;
+	double		root;
 };
 
 struct	s_cylinder
@@ -168,8 +182,17 @@ struct	s_cylinder
 	t_vec3		normal;
 	double		diameter;
 	double		radius;
-	double		radius2;
 	double		height;
+	t_point3	h;
+	t_vec3		h_unit;
+	t_vec3		co;
+	double		a;
+	double		half_b;
+	double		c;
+	double		discriminant;
+	double		sqrtd;
+	double		root;
+	double		h_len;
 };
 
 struct	s_square
@@ -177,6 +200,12 @@ struct	s_square
 	t_point3	center;
 	t_vec3		normal;
 	double		length;
+	t_vec3		op;
+	double		denominator;
+	double		root;
+	t_vec3		n_x;
+	t_vec3		n_y;
+	t_vec3		cp;
 };
 
 struct	s_light
@@ -185,6 +214,8 @@ struct	s_light
 	t_color3	light_color;
 	double		bright_ratio;
 };
+
+struct	
 
 struct  s_vars
 {

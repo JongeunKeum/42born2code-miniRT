@@ -12,59 +12,83 @@
 
 #include "minirt.h"
 
-void	selected_translate(void)
+static void	selected_translate(void)
 {
 	printf("+\t\t\t\t\t       +\n");
 	printf("#   %s        %s\t\t\t\t       #\n", B_BLUE, B_RESET);
-	printf(":   %s  %s    %s  %s\t       %s   %s\t       %s   %s     :\n", B_BLUE, B_WHT, B_BLUE, B_RESET, B_WHT, B_RESET, B_WHT, B_RESET);
-	printf("+   %s   %s  %s   %s\t       %s %s  %s %s\t      %s %s%s  %s      +\n", B_BLUE, B_WHT, B_BLUE, B_RESET, B_WHT, B_RESET, B_WHT, B_RESET, B_WHT, B_RESET, U_WHT, B_RESET); 
-	printf("#   %s   %s  %s   %s\t       %s   %s\t         %s %s     #\n", B_BLUE, B_WHT, B_BLUE, B_RESET, B_WHT, B_RESET, B_WHT, B_RESET);
-	printf(":   %s   %s  %s   %s\t       %s %s  %s %s\t      %s   %s      :\n", B_BLUE, B_WHT, B_BLUE, B_RESET, B_WHT, B_RESET, B_WHT, B_RESET, B_WHT, B_RESET);
+	printf(":   %s  %s    %s  %s\t       %s   %s\t       %s   %s     :\n",
+			B_BLUE, B_WHT, B_BLUE, B_RESET, B_WHT, B_RESET, B_WHT, B_RESET);
+	printf("+   %s   %s  %s   %s\t       ", B_BLUE, B_WHT, B_BLUE, B_RESET);
+	printf("%s %s  %s %s\t      %s %s%s  %s      +\n",
+			B_WHT, B_RESET, B_WHT, B_RESET, B_WHT, B_RESET, U_WHT, B_RESET);
+	printf("#   %s   %s  %s   %s\t       %s   %s\t         %s %s     #\n",
+			B_BLUE, B_WHT, B_BLUE, B_RESET, B_WHT, B_RESET, B_WHT, B_RESET);
+	printf(":   %s   %s  %s   %s\t       %s %s  %s %s\t      %s   %s      :\n"
+			, B_BLUE, B_WHT, B_BLUE, B_RESET, B_WHT, B_RESET, B_WHT, B_RESET,
+			B_WHT, B_RESET);
 	printf("+   %s        %s\t\t\t\t       +\n", B_BLUE, B_RESET);
 	printf("#\t\t\t\t\t       #\n");
 	printf(":----------------------------------------------:\n");
 }
 
-void	selected_rotate(void)
+static void	selected_rotate(void)
 {
 	printf("+\t\t\t\t\t       +\n");
 	printf("#\t\t     %s        %s\t\t       #\n", B_BLUE, B_RESET);
-	printf(":     %s    %s\t     %s  %s   %s   %s\t       %s   %s     :\n", B_WHT, B_RESET, B_BLUE, B_WHT, B_BLUE, B_RESET, B_WHT, B_RESET);
-	printf("+      %s  %s\t     %s  %s %s  %s %s  %s\t      %s %s%s  %s      +\n", B_WHT, B_RESET, B_BLUE, B_WHT, B_BLUE, B_WHT, B_BLUE, B_RESET, B_WHT, B_RESET, U_WHT, B_RESET);
-	printf("#      %s  %s\t     %s  %s   %s   %s\t         %s %s     #\n", B_WHT, B_RESET, B_BLUE, B_WHT, B_BLUE, B_RESET, B_WHT, B_RESET);
-	printf(":      %s  %s\t     %s  %s %s  %s %s  %s\t      %s   %s      :\n", B_WHT, B_RESET, B_BLUE, B_WHT, B_BLUE, B_WHT, B_BLUE, B_RESET, B_WHT, B_RESET);
+	printf(":     %s    %s\t     %s  %s   %s   %s\t       %s   %s     :\n",
+			B_WHT, B_RESET, B_BLUE, B_WHT, B_BLUE, B_RESET, B_WHT, B_RESET);
+	printf("+      %s  %s\t     ", B_WHT, B_RESET);
+	printf("%s  %s %s  %s %s  %s\t      %s %s%s  %s      +\n",
+			B_BLUE, B_WHT, B_BLUE, B_WHT, B_BLUE,
+			B_RESET, B_WHT, B_RESET, U_WHT, B_RESET);
+	printf("#      %s  %s\t     %s  %s   %s   %s\t         %s %s     #\n",
+			B_WHT, B_RESET, B_BLUE, B_WHT, B_BLUE, B_RESET, B_WHT, B_RESET);
+	printf(":      %s  %s\t     %s  %s %s  %s %s  %s\t      %s   %s      :\n",
+			B_WHT, B_RESET, B_BLUE, B_WHT, B_BLUE, B_WHT, B_BLUE, B_RESET,
+			B_WHT, B_RESET);
 	printf("+\t\t     %s        %s\t\t       +\n", B_BLUE, B_RESET);
 	printf("#\t\t\t\t\t       #\n");
 	printf(":----------------------------------------------:\n");
 }
 
-void	selected_scale(void)
+static void	selected_scale(void)
 {
 	printf("+\t\t\t\t\t       +\n");
 	printf("#\t\t\t\t    %s        %s   #\n", B_BLUE, B_RESET);
-	printf(":     %s    %s\t       %s   %s\t    %s   %s   %s  %s   :\n", B_WHT, B_RESET, B_WHT, B_RESET, B_BLUE, B_WHT, B_BLUE, B_RESET);
-	printf("+      %s  %s\t       %s %s  %s %s\t    %s  %s %s%s  %s   %s   +\n", B_WHT, B_RESET, B_WHT, B_RESET, B_WHT, B_RESET, B_BLUE, B_WHT, B_BLUE, U_WHT, B_BLUE, B_RESET);
-	printf("#      %s  %s\t       %s   %s\t    %s     %s %s  %s   #\n", B_WHT, B_RESET, B_WHT, B_RESET, B_BLUE, B_WHT, B_BLUE, B_RESET);
-	printf(":      %s  %s\t       %s %s  %s %s\t    %s  %s   %s   %s   :\n", B_WHT, B_RESET, B_WHT, B_RESET, B_WHT, B_RESET, B_BLUE, B_WHT, B_BLUE, B_RESET);
+	printf(":     %s    %s\t       %s   %s\t    %s   %s   %s  %s   :\n",
+			B_WHT, B_RESET, B_WHT, B_RESET, B_BLUE, B_WHT, B_BLUE, B_RESET);
+	printf("+      %s  %s\t       %s %s  %s %s\t    %s  %s %s%s  %s   %s   +\n"
+			, B_WHT, B_RESET, B_WHT, B_RESET, B_WHT, B_RESET, B_BLUE,
+			B_WHT, B_BLUE, U_WHT, B_BLUE, B_RESET);
+	printf("#      %s  %s\t       %s   %s\t    %s     %s %s  %s   #\n",
+			B_WHT, B_RESET, B_WHT, B_RESET, B_BLUE, B_WHT, B_BLUE, B_RESET);
+	printf(":      %s  %s\t       %s %s  %s %s\t    %s  %s   %s   %s   :\n",
+			B_WHT, B_RESET, B_WHT, B_RESET, B_WHT, B_RESET, B_BLUE, B_WHT,
+			B_BLUE, B_RESET);
 	printf("+\t\t\t\t    %s        %s   +\n", B_BLUE, B_RESET);
 	printf("#\t\t\t\t\t       #\n");
 	printf(":----------------------------------------------:\n");
 }
 
-void	default_transform(void)
+static void	default_transform(void)
 {
 	printf("+\t\t\t\t\t       +\n");
 	printf("#\t\t\t\t\t       #\n");
-	printf(":     %s    %s\t       %s   %s   \t       %s   %s     :\n", B_WHT, B_RESET, B_WHT, B_RESET, B_WHT, B_RESET);
-	printf("+      %s  %s\t       %s %s  %s %s  \t      %s %s%s  %s      +\n", B_WHT, B_RESET, B_WHT, B_RESET, B_WHT, B_RESET, B_WHT, B_RESET, U_WHT, B_RESET);
-	printf("#      %s  %s\t       %s   %s   \t         %s %s     #\n", B_WHT, B_RESET, B_WHT, B_RESET, B_WHT, B_RESET);
-	printf(":      %s  %s\t       %s %s  %s %s  \t      %s   %s      :\n", B_WHT, B_RESET, B_WHT, B_RESET, B_WHT, B_RESET, B_WHT, B_RESET);
+	printf(":     %s    %s\t       %s   %s   \t       %s   %s     :\n",
+			B_WHT, B_RESET, B_WHT, B_RESET, B_WHT, B_RESET);
+	printf("+      %s  %s\t       %s %s  %s %s  \t      %s %s%s  %s      +\n",
+			B_WHT, B_RESET, B_WHT, B_RESET, B_WHT, B_RESET, B_WHT, B_RESET,
+			U_WHT, B_RESET);
+	printf("#      %s  %s\t       %s   %s   \t         %s %s     #\n",
+			B_WHT, B_RESET, B_WHT, B_RESET, B_WHT, B_RESET);
+	printf(":      %s  %s\t       %s %s  %s %s  \t      %s   %s      :\n",
+			B_WHT, B_RESET, B_WHT, B_RESET, B_WHT, B_RESET, B_WHT, B_RESET);
 	printf("+\t\t\t\t\t       +\n");
 	printf("#\t\t\t\t\t       #\n");
 	printf(":----------------------------------------------:\n");
 }
 
-void	transform_panel(int trans)
+void		transform_panel(int trans)
 {
 	if (trans == TRANSLATE)
 		selected_translate();

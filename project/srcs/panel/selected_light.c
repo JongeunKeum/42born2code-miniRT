@@ -67,7 +67,7 @@ static void	line_four_six(void)
 	printf(":\t\t\t\t\t       :\n");
 }
 
-void	selected_light(void)
+void		selected_light(void)
 {
 	line_one_three();
 	line_four_six();

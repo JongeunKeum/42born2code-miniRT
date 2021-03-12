@@ -24,10 +24,13 @@ void		make_viewport(t_camera *camera)
 	n_y = vunit(vcross(camera->normal, n_x));
 	camera->horizontal = vmult(n_x, camera->viewport_w);
 	camera->vertical = vmult(n_y, camera->viewport_h);
-	camera->left_bottom = vplus(vminus(vminus(camera->orig, vdivide(camera->horizontal, 2)), vdivide(camera->vertical, 2)), vunit(camera->normal));
+	camera->left_bottom = vplus(vminus(vminus(camera->orig,
+					vdivide(camera->horizontal, 2)), vdivide(camera->vertical,
+					2)), vunit(camera->normal));
 }
 
-t_camera	*camera(t_canvas *canvas, t_point3 orig, t_vec3 normal, double degrees)
+t_camera	*camera(t_canvas *canvas, t_point3 orig,
+		t_vec3 normal, double degrees)
 {
 	t_camera	*cam;
 	double		viewport_width;

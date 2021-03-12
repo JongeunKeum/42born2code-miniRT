@@ -12,7 +12,7 @@
 
 #include "minirt.h"
 
-static int	count_info(char **info)
+int	count_info(char **info)
 {
 	int	cnt;
 	int	i;
@@ -24,7 +24,7 @@ static int	count_info(char **info)
 	return (cnt);
 }
 
-int			check_err_r(char **info)
+int	check_err_r(char **info)
 {
 	if (count_info(info) != 3)
 		return (0);
@@ -33,7 +33,7 @@ int			check_err_r(char **info)
 	return (1);
 }
 
-int			check_err_a(char **info)
+int	check_err_a(char **info)
 {
 	if (count_info(info) != 3)
 		return (0);
@@ -42,7 +42,7 @@ int			check_err_a(char **info)
 	return (1);
 }
 
-int			check_err_c(char **info)
+int	check_err_c(char **info)
 {
 	if (count_info(info) != 4)
 		return (0);
@@ -51,52 +51,11 @@ int			check_err_c(char **info)
 	return (1);
 }
 
-int			check_err_l(char **info)
+int	check_err_l(char **info)
 {
 	if (count_info(info) != 4)
 		return (0);
 	if (ft_atoi(info[2]) < 0 || ft_atoi(info[2]) > 1)
-		return (0);
-	return (1);
-}
-
-int			check_err_sp(char **info)
-{
-	if (count_info(info) != 4)
-		return (0);
-	if (ft_atoi(info[2]) < 0)
-		return (0);
-	return (1);
-}
-
-int			check_err_pl(char **info)
-{
-	if (count_info(info) != 4)
-		return (0);
-	return (1);
-}
-
-int			check_err_sq(char **info)
-{
-	if (count_info(info) != 5)
-		return (0);
-	if (ft_atoi(info[3]) < 0)
-		return (0);
-	return (1);
-}
-
-int			check_err_cy(char **info)
-{
-	if (count_info(info) != 6)
-		return (0);
-	if (ft_atoi(info[3]) < 0 || ft_atoi(info[4]) < 0)
-		return (0);
-	return (1);
-}
-
-int			check_err_tr(char **info)
-{
-	if (count_info(info) != 5)
 		return (0);
 	return (1);
 }
