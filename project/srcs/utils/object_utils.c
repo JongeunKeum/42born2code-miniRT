@@ -3,7 +3,7 @@
 void	oadd(t_object **list, t_object *new)
 {
 	t_object	*cur;
-	void		*pre;
+	void		*tmp;
 
 	if (*list == NULL)
 	{
@@ -14,7 +14,7 @@ void	oadd(t_object **list, t_object *new)
 	cur = *list;
 	while (cur->next)
 		cur = cur->next;
-	pre = cur;
+	tmp = cur;
 	cur->next = new;
-	new->pre = pre;
+	new->pre = tmp;
 }

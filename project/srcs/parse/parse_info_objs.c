@@ -12,12 +12,12 @@ int	info_sp(char **info, t_scene *scene)
 	element = ft_split(info[1], ',');
 	center = point3(ft_atod(element[0]), ft_atod(element[1]),
 			ft_atod(element[2]));
-	free(element);
+	free_split(element);
 	diameter = ft_atod(info[2]);
 	element = ft_split(info[3], ',');
 	color = color3(ft_atod(element[0]), ft_atod(element[1]),
 			ft_atod(element[2]));
-	free(element);
+	free_split(element);
 	if (!check_color(color))
 		return (0);
 	color = vdivide(color, 255.0);
@@ -37,15 +37,15 @@ int	info_pl(char **info, t_scene *scene)
 	element = ft_split(info[1], ',');
 	center = point3(ft_atod(element[0]), ft_atod(element[1]),
 			ft_atod(element[2]));
-	free(element);
+	free_split(element);
 	element = ft_split(info[2], ',');
 	normal = vec3(ft_atod(element[0]), ft_atod(element[1]),
 			ft_atod(element[2]));
-	free(element);
+	free_split(element);
 	element = ft_split(info[3], ',');
 	color = color3(ft_atod(element[0]), ft_atod(element[1]),
 			ft_atod(element[2]));
-	free(element);
+	free_split(element);
 	if (!check_color(color))
 		return (0);
 	color = vdivide(color, 255.0);
@@ -65,14 +65,14 @@ int	info_sq(char **info, t_scene *scene)
 		return (0);
 	elem = ft_split(info[1], ',');
 	center = point3(ft_atod(elem[0]), ft_atod(elem[1]), ft_atod(elem[2]));
-	free(elem);
+	free_split(elem);
 	elem = ft_split(info[2], ',');
 	normal = vec3(ft_atod(elem[0]), ft_atod(elem[1]), ft_atod(elem[2]));
-	free(elem);
+	free_split(elem);
 	length = ft_atod(info[3]);
 	elem = ft_split(info[4], ',');
 	color = color3(ft_atod(elem[0]), ft_atod(elem[1]), ft_atod(elem[2]));
-	free(elem);
+	free_split(elem);
 	if (!check_color(color))
 		return (0);
 	color = vdivide(color, 255.0);
@@ -92,15 +92,15 @@ int	info_cy(char **info, t_scene *scene)
 	element = ft_split(info[1], ',');
 	center = point3(ft_atod(element[0]), ft_atod(element[1]),
 			ft_atod(element[2]));
-	free(element);
+	free_split(element);
 	element = ft_split(info[2], ',');
 	normal = vec3(ft_atod(element[0]), ft_atod(element[1]),
 			ft_atod(element[2]));
-	free(element);
+	free_split(element);
 	element = ft_split(info[5], ',');
 	color = color3(ft_atod(element[0]), ft_atod(element[1]),
 			ft_atod(element[2]));
-	free(element);
+	free_split(element);
 	if (!check_color(color))
 		return (0);
 	color = vdivide(color, 255.0);
@@ -121,16 +121,16 @@ int	info_tr(char **info, t_scene *scene)
 		return (0);
 	elem = ft_split(info[1], ',');
 	a = point3(ft_atod(elem[0]), ft_atod(elem[1]), ft_atod(elem[2]));
-	free(elem);
+	free_split(elem);
 	elem = ft_split(info[2], ',');
 	b = point3(ft_atod(elem[0]), ft_atod(elem[1]), ft_atod(elem[2]));
-	free(elem);
+	free_split(elem);
 	elem = ft_split(info[3], ',');
 	c = point3(ft_atod(elem[0]), ft_atod(elem[1]), ft_atod(elem[2]));
-	free(elem);
+	free_split(elem);
 	elem = ft_split(info[4], ',');
 	color = color3(ft_atod(elem[0]), ft_atod(elem[1]), ft_atod(elem[2]));
-	free(elem);
+	free_split(elem);
 	if (!check_color(color))
 		return (0);
 	color = vdivide(color, 255.0);

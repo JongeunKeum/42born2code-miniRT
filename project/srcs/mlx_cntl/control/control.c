@@ -15,6 +15,7 @@
 static int	close_window(t_vars *vars)
 {
 	mlx_destroy_window(vars->mlx, vars->win);
+	free_all(vars);
 	exit(0);
 }
 

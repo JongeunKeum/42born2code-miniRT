@@ -31,7 +31,7 @@ int	info_a(char **info, t_scene *scene)
 	element = ft_split(info[2], ',');
 	color = color3(ft_atod(element[0]), ft_atod(element[1]),
 			ft_atod(element[2]));
-	free(element);
+	free_split(element);
 	if (!check_color(color))
 		return (0);
 	color = vdivide(color, 255.0);
@@ -51,11 +51,11 @@ int	info_c(char **info, t_scene *scene)
 	element = ft_split(info[1], ',');
 	orig = point3(ft_atod(element[0]), ft_atod(element[1]),
 			ft_atod(element[2]));
-	free(element);
+	free_split(element);
 	element = ft_split(info[2], ',');
 	normal = point3(ft_atod(element[0]), ft_atod(element[1]),
 			ft_atod(element[2]));
-	free(element);
+	free_split(element);
 	degrees = ft_atod(info[3]);
 	oadd(&scene->camera, object(CAM,
 				camera(&scene->canvas, orig, normal, degrees),
@@ -75,12 +75,12 @@ int	info_l(char **info, t_scene *scene)
 	element = ft_split(info[1], ',');
 	position = point3(ft_atod(element[0]), ft_atod(element[1]),
 			ft_atod(element[2]));
-	free(element);
+	free_split(element);
 	bright_ratio = ft_atod(info[2]);
 	element = ft_split(info[3], ',');
 	color = color3(ft_atod(element[0]), ft_atod(element[1]),
 			ft_atod(element[2]));
-	free(element);
+	free_split(element);
 	if (!check_color(color))
 		return (0);
 	color = vdivide(color, 255.0);

@@ -52,8 +52,10 @@ int			parse_rt(char *argv, t_scene *scene)
 		if (!(handle_info(info, scene)))
 			return (0);
 		free(line);
-		free(info);
+		free_split(info);
 	}
+	free(line);
+	close(fd);
 	if (ret < 0)
 		return (0);
 	return (1);
