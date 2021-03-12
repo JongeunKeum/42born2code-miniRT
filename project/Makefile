@@ -63,8 +63,8 @@ INC = ./includes
 RM = rm -f
 
 MLX = libmlx.dylib
-MLX_DIR = ./lib/mlx
-MLX_MAC_DIR = ./lib/mlx_mac
+MLX_DIR = ./lib/mlx_linux
+MLX_MAC_DIR = ./lib/mlx
 
 vpath %.c $(SRCS_DIR)
 
