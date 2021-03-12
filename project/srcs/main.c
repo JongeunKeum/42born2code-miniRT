@@ -1,5 +1,4 @@
 #include "minirt.h"
-#include <stdio.h>
 
 t_scene	*scene_init()
 {

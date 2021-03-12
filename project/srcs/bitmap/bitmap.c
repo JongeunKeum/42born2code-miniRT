@@ -96,11 +96,11 @@ void	save_bitmap(t_vars *vars)
 	close(fd);
 }
 
-int		bitmap(char *str, t_vars *vars)
+int		bitmap(char *argv, t_vars *vars)
 {
 	vars->mlx = mlx_init();
 	mlx_get_screen_size(vars->mlx, &vars->scene->max_width, &vars->scene->max_height);
-	if (!(parse_rt(str, vars->scene)))
+	if (!(parse_rt(argv, vars->scene)))
 		return (0);
 	if (!(set_mlx_bmp(vars)))
 		return (-1);
