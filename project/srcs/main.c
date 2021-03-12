@@ -6,7 +6,7 @@
 /*   By: jkeum <jkeum@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/12 23:08:13 by jkeum             #+#    #+#             */
-/*   Updated: 2021/03/13 00:51:35 by jkeum            ###   ########.fr       */
+/*   Updated: 2021/03/13 01:30:49 by jkeum            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ int		main(int argc, char *argv[])
 	int		err_code;
 
 	if (!(vars.scene = scene_init()))
-		return (print_err(-1));
+		return (print_err(-1, &vars));
 	err_code = 1;
 	if (argc == 2)
 	{
@@ -98,6 +98,6 @@ int		main(int argc, char *argv[])
 			err_code = bitmap(argv[2], &vars);
 	}
 	if (err_code <= 0)
-		return (print_err(err_code, vars));
+		return (print_err(err_code, &vars));
 	return (0);
 }
