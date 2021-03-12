@@ -6,7 +6,7 @@
 /*   By: jkeum <jkeum@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 00:53:06 by jkeum             #+#    #+#             */
-/*   Updated: 2021/03/13 01:46:12 by jkeum            ###   ########.fr       */
+/*   Updated: 2021/03/13 03:39:09 by jkeum            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,12 @@ void	free_list(t_object **obj)
 		return ;
 	cur = *obj;
 	while (cur->next)
+		cur = cur->next;
+	while (cur->pre)
 	{
 		tmp = cur;
 		free(tmp->element);
-		cur = cur->next;
+		cur = cur->pre;
 		free(tmp);
 	}
 	free(cur->element);
