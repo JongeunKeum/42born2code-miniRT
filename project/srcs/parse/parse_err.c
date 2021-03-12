@@ -6,7 +6,7 @@
 /*   By: jkeum <jkeum@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/11 18:44:13 by jkeum             #+#    #+#             */
-/*   Updated: 2021/03/11 18:44:20 by jkeum            ###   ########.fr       */
+/*   Updated: 2021/03/13 00:34:58 by jkeum            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	check_err_a(char **info)
 {
 	if (count_info(info) != 3)
 		return (0);
-	if (ft_atoi(info[1]) < 0 || ft_atoi(info[1]) > 1)
+	if (ft_atod(info[1]) < 0 || ft_atod(info[1]) > 1)
 		return (0);
 	return (1);
 }
@@ -55,7 +55,7 @@ int	check_err_l(char **info)
 {
 	if (count_info(info) != 4)
 		return (0);
-	if (ft_atoi(info[2]) < 0 || ft_atoi(info[2]) > 1)
+	if (ft_atod(info[2]) < 0 || ft_atod(info[2]) > 1)
 		return (0);
 	return (1);
 }

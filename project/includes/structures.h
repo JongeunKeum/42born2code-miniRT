@@ -6,7 +6,7 @@
 /*   By: jkeum <jkeum@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/11 18:21:24 by jkeum             #+#    #+#             */
-/*   Updated: 2021/03/11 18:23:08 by jkeum            ###   ########.fr       */
+/*   Updated: 2021/03/12 23:35:12 by jkeum            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,6 +130,10 @@ struct	s_scene
 	int				max_height;
 	int				min_width;
 	int				min_height;
+	int				cnt_r;
+	int				cnt_a;
+	int				cnt_c;
+	int				cnt_l;
 };
 
 struct	s_object

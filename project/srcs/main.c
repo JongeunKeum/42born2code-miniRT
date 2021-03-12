@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jkeum <jkeum@student.42seoul.kr>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/03/12 23:08:13 by jkeum             #+#    #+#             */
+/*   Updated: 2021/03/13 00:51:35 by jkeum            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minirt.h"
 
 t_scene	*scene_init(void)
@@ -11,6 +23,10 @@ t_scene	*scene_init(void)
 	scene->camera = NULL;
 	scene->min_width = 480;
 	scene->min_height = 480;
+	scene->cnt_r = 0;
+	scene->cnt_a = 0;
+	scene->cnt_c = 0;
+	scene->cnt_l = 0;
 	return (scene);
 }
 
@@ -41,13 +57,19 @@ int		minirt(char *argv, t_vars *vars)
 	return (1);
 }
 
-int		print_err(int err_code)
+int		print_err(int err_code, t_vars *vars)
 {
+	free_list(&vars->scene->camera);
+	free_list(&vars->scene->light);
+	free_list(&vars->scene->world);
 	if (err_code == 0)
-		printf("%s\n!!!!! Error in '.rt' file, Please check the file.\n\n",
-				C_RED);
+		printf("%s\n!!!!! Error: Please check the \".rt\" file.\n\n", C_RED);
 	else if (err_code == -1)
-		printf("%s\n!!!!! Error in memory allocation.\n\n", C_RED);
+		printf("%s\n!!!!! Error: Memory Allocation failed\n\n", C_RED);
+	else if (err_code == -2)
+		printf("%s\n!!!!! Error: Wrong argument to save as \".bmp\" file.\n",
+				C_RED);
+	free_scene(vars);
 	return (0);
 }
 
@@ -58,12 +80,24 @@ int		main(int argc, char *argv[])
 
 	if (!(vars.scene = scene_init()))
 		return (print_err(-1));
-	if (argc == 2 && check_input_file(argv[1]))
-		err_code = minirt(argv[1], &vars);
-	else if (argc == 3 && !ft_strcmp(argv[1], "--save") &&
-			check_input_file(argv[2]))
-		err_code = bitmap(argv[2], &vars);
-	if (err_code == 0 || err_code == -1)
-		return (print_err(err_code));
+	err_code = 1;
+	if (argc == 2)
+	{
+		if (!check_input_file(argv[1]))
+			err_code = 0;
+		else
+			err_code = minirt(argv[1], &vars);
+	}
+	else if (argc == 3)
+	{
+		if (ft_strcmp(argv[1], "--save"))
+			err_code = -2;
+		else if (!check_input_file(argv[2]))
+			err_code = 0;
+		else
+			err_code = bitmap(argv[2], &vars);
+	}
+	if (err_code <= 0)
+		return (print_err(err_code, vars));
 	return (0);
 }

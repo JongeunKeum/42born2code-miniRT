@@ -1,16 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   hit_sphere.c                                       :+:      :+:    :+:   */
+/*   hit_sphere_rainbow.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jkeum <jkeum@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/13 00:53:34 by jkeum             #+#    #+#             */
-/*   Updated: 2021/03/13 00:53:35 by jkeum            ###   ########.fr       */
+/*   Created: 2021/03/13 00:53:51 by jkeum             #+#    #+#             */
+/*   Updated: 2021/03/13 00:53:53 by jkeum            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
+
+static t_color3	get_rainbow(t_sphere *sp, t_hit_record *rec)
+{
+	t_color3	color;
+	t_vec3		n;
+
+	n = vunit(vminus(rec->p, sp->center));
+	color = vmult(color3(n.x + 1, n.y + 1, n.z + 1), 0.5);
+	return (color);
+}
 
 t_bool			hit_sphere(t_object *sp_obj, t_ray *ray, t_hit_record *rec)
 {
@@ -37,6 +47,6 @@ t_bool			hit_sphere(t_object *sp_obj, t_ray *ray, t_hit_record *rec)
 	rec->p = ray_at(ray, sp->root);
 	rec->normal = vdivide(vminus(rec->p, sp->center), sp->radius);
 	set_face_normal(ray, rec);
-	rec->albedo = sp_obj->albedo;
+	rec->albedo = get_rainbow(sp, rec);
 	return (TRUE);
 }

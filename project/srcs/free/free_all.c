@@ -1,10 +1,30 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   free_all.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jkeum <jkeum@student.42seoul.kr>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/03/13 00:53:06 by jkeum             #+#    #+#             */
+/*   Updated: 2021/03/13 00:53:07 by jkeum            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minirt.h"
+
+void	free_scene(t_vars *vars)
+{
+	if (vars->scene)
+		free(vars->scene);
+}
 
 void	free_list(t_object **obj)
 {
 	t_object	*tmp;
 	t_object	*cur;
 
+	if (!obj)
+		return ;
 	cur = *obj;
 	while (cur->next)
 	{

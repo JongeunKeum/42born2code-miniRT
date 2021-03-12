@@ -6,7 +6,7 @@
 /*   By: jkeum <jkeum@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/11 18:45:37 by jkeum             #+#    #+#             */
-/*   Updated: 2021/03/11 18:45:55 by jkeum            ###   ########.fr       */
+/*   Updated: 2021/03/12 23:43:27 by jkeum            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ void		make_viewport(t_camera *camera)
 	camera->horizontal = vmult(n_x, camera->viewport_w);
 	camera->vertical = vmult(n_y, camera->viewport_h);
 	camera->left_bottom = vplus(vminus(vminus(camera->orig,
-					vdivide(camera->horizontal, 2)), vdivide(camera->vertical,
-					2)), vunit(camera->normal));
+					vdivide(camera->horizontal, 2)),
+				vdivide(camera->vertical, 2)), vunit(camera->normal));
 }
 
 t_camera	*camera(t_canvas *canvas, t_point3 orig,
@@ -38,7 +38,7 @@ t_camera	*camera(t_canvas *canvas, t_point3 orig,
 
 	cam = (t_camera *)malloc(sizeof(t_camera));
 	fov = (M_PI / 180) * degrees;
-	viewport_width = 2.0 * tan(fov);
+	viewport_width = 2.0 * tan(fov / 2);
 	cam->focal_len = 1.0;
 	cam->orig = orig;
 	cam->normal = normal;

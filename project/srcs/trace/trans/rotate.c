@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   rotate.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jkeum <jkeum@student.42seoul.kr>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/03/13 00:54:35 by jkeum             #+#    #+#             */
+/*   Updated: 2021/03/13 00:54:36 by jkeum            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minirt.h"
 
 t_vec3	rotate_z(t_vec3 normal, int sign)
@@ -48,7 +60,7 @@ t_vec3	rotate_y(t_vec3 normal, int sign)
 	else if (sign == MINUS)
 	{
 		result.z = normal.z * cos(-THETA) - normal.x * sin(-THETA);
-		result.x = normal.x * sin(-THETA) + normal.z * cos(-THETA);
+		result.x = normal.z * sin(-THETA) + normal.x * cos(-THETA);
 	}
 	result.y = normal.y;
 	return (result);

@@ -6,7 +6,7 @@
 /*   By: jkeum <jkeum@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/11 18:35:10 by jkeum             #+#    #+#             */
-/*   Updated: 2021/03/11 18:35:12 by jkeum            ###   ########.fr       */
+/*   Updated: 2021/03/13 01:24:50 by jkeum            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ static void	default_axis(void)
 			B_RESET, B_WHT, B_RESET, B_WHT, B_RESET, B_WHT, B_RESET);
 	printf("+\t\t\t\t\t       +\n");
 	printf("#\t\t\t\t\t       #\n");
-	printf(":----------------------------------------------:\n");
 }
 
 static void	selected_x(void)
@@ -48,7 +47,6 @@ static void	selected_x(void)
 			B_WHT, B_RESET);
 	printf("+   %s        %s\t\t\t\t       +\n", B_PRPL, B_RESET);
 	printf("#\t\t\t\t\t       #\n");
-	printf(":----------------------------------------------:\n");
 }
 
 static void	selected_y(void)
@@ -69,7 +67,6 @@ static void	selected_y(void)
 			B_WHT, B_RESET);
 	printf("+\t\t    %s        %s\t\t       +\n", B_PRPL, B_RESET);
 	printf("#\t\t\t\t\t       #\n");
-	printf(":----------------------------------------------:\n");
 }
 
 static void	selected_z(void)
@@ -89,7 +86,6 @@ static void	selected_z(void)
 			B_PRPL, B_RESET);
 	printf("+\t\t\t\t    %s        %s   +\n", B_PRPL, B_RESET);
 	printf("#\t\t\t\t\t       #\n");
-	printf(":----------------------------------------------:\n");
 }
 
 void		axis_panel(int axis)

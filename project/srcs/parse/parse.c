@@ -6,7 +6,7 @@
 /*   By: jkeum <jkeum@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/11 18:38:57 by jkeum             #+#    #+#             */
-/*   Updated: 2021/03/11 18:44:00 by jkeum            ###   ########.fr       */
+/*   Updated: 2021/03/13 01:05:22 by jkeum            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,18 +45,24 @@ int			parse_rt(char *argv, t_scene *scene)
 	char	*line;
 	char	**info;
 
-	fd = open(argv, O_RDONLY);
+	if ((fd = open(argv, O_RDONLY)) < 0)
+		return (0);
 	while ((ret = get_next_line(fd, &line)) > 0)
 	{
 		info = ft_split(line, ' ');
 		if (!(handle_info(info, scene)))
+		{
+			free(line);
+			free_split(info);
 			return (0);
+		}
 		free(line);
 		free_split(info);
 	}
 	free(line);
 	close(fd);
-	if (ret < 0)
+	if (scene->cnt_r != 1 || scene->cnt_a != 1 ||
+			scene->cnt_c <= 0 || scene->cnt_l <= 0 || ret < 0)
 		return (0);
 	return (1);
 }

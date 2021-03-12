@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse_info_racl.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jkeum <jkeum@student.42seoul.kr>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/03/13 00:52:36 by jkeum             #+#    #+#             */
+/*   Updated: 2021/03/13 00:52:37 by jkeum            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minirt.h"
 
 int	info_r(char **info, t_scene *scene)
@@ -5,6 +17,7 @@ int	info_r(char **info, t_scene *scene)
 	int width;
 	int height;
 
+	scene->cnt_r++;
 	if (!check_err_r(info))
 		return (0);
 	width = ft_atoi(info[1]);
@@ -26,6 +39,7 @@ int	info_a(char **info, t_scene *scene)
 	char		**element;
 	t_color3	color;
 
+	scene->cnt_a++;
 	if (!check_err_a(info))
 		return (0);
 	element = ft_split(info[2], ',');
@@ -46,6 +60,7 @@ int	info_c(char **info, t_scene *scene)
 	double		degrees;
 	char		**element;
 
+	scene->cnt_c++;
 	if (!check_err_c(info))
 		return (0);
 	element = ft_split(info[1], ',');
@@ -56,6 +71,8 @@ int	info_c(char **info, t_scene *scene)
 	normal = point3(ft_atod(element[0]), ft_atod(element[1]),
 			ft_atod(element[2]));
 	free_split(element);
+	if (normal.x == 0 && normal.y == 0 && normal.z == 0)
+		return (0);
 	degrees = ft_atod(info[3]);
 	oadd(&scene->camera, object(CAM,
 				camera(&scene->canvas, orig, normal, degrees),
@@ -70,6 +87,7 @@ int	info_l(char **info, t_scene *scene)
 	t_color3	color;
 	char		**element;
 
+	scene->cnt_l++;
 	if (!check_err_l(info))
 		return (0);
 	element = ft_split(info[1], ',');

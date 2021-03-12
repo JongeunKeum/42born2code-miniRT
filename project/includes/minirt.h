@@ -6,7 +6,7 @@
 /*   By: jkeum <jkeum@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/11 18:12:29 by jkeum             #+#    #+#             */
-/*   Updated: 2021/03/11 18:13:04 by jkeum            ###   ########.fr       */
+/*   Updated: 2021/03/12 23:13:51 by jkeum            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
 # include "trans.h"
 # include "bitmap.h"
 # include "panel.h"
+# include "free.h"
 # include "get_next_line.h"
 # include "libft.h"
 # include "key_macos.h"

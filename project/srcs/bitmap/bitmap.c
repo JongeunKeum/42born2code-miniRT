@@ -6,7 +6,7 @@
 /*   By: jkeum <jkeum@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/11 18:25:30 by jkeum             #+#    #+#             */
-/*   Updated: 2021/03/11 18:53:27 by jkeum            ###   ########.fr       */
+/*   Updated: 2021/03/12 23:14:32 by jkeum            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,14 +79,15 @@ static void	rendering_bmp(t_vars *vars)
 	}
 }
 
-static void	save_bitmap(t_vars *vars)
+static int	save_bitmap(t_vars *vars)
 {
 	int				fd;
 	int				i;
 	int				j;
 	unsigned int	*img;
 
-	fd = open("./image.bmp", O_WRONLY | O_CREAT | O_TRUNC, 0666);
+	if ((fd = open("./image.bmp", O_WRONLY | O_CREAT | O_TRUNC, 0666)) < 0)
+		return (0);
 	set_bitmap(vars, fd);
 	rendering_bmp(vars);
 	img = (unsigned int *)vars->img->addr;
@@ -99,6 +100,7 @@ static void	save_bitmap(t_vars *vars)
 					vars->img->bits_per_pixel / 8);
 	}
 	close(fd);
+	return (1);
 }
 
 int			bitmap(char *argv, t_vars *vars)
@@ -106,10 +108,11 @@ int			bitmap(char *argv, t_vars *vars)
 	vars->mlx = mlx_init();
 	mlx_get_screen_size(vars->mlx, &vars->scene->max_width,
 			&vars->scene->max_height);
-	if (!(parse_rt(argv, vars->scene)))
+	if (!parse_rt(argv, vars->scene))
 		return (0);
-	if (!(set_mlx_bmp(vars)))
+	if (!set_mlx_bmp(vars))
 		return (-1);
-	save_bitmap(vars);
+	if (!save_bitmap(vars))
+		return (0);
 	return (1);
 }
