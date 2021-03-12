@@ -6,7 +6,7 @@
 /*   By: jkeum <jkeum@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 00:53:06 by jkeum             #+#    #+#             */
-/*   Updated: 2021/03/13 00:53:07 by jkeum            ###   ########.fr       */
+/*   Updated: 2021/03/13 01:46:12 by jkeum            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	free_list(t_object **obj)
 	t_object	*tmp;
 	t_object	*cur;
 
-	if (!obj)
+	if (!obj || !(*obj))
 		return ;
 	cur = *obj;
 	while (cur->next)
