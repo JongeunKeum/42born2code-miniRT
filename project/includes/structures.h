@@ -33,6 +33,7 @@ typedef struct s_triangle	t_triangle;
 typedef struct s_cylinder	t_cylinder;
 typedef struct s_square		t_square;
 typedef struct s_light		t_light;
+typedef struct s_phong		t_phong;
 
 typedef struct s_img		t_img;
 typedef struct s_vars		t_vars;
@@ -47,7 +48,7 @@ typedef int					t_bool;
 # define Z 3
 # define PLUS 4
 # define MINUS 5
-# define THETA (M_PI / (double)18)
+# define THETA 0.175
 
 typedef int					t_object_type;
 # define SP 1
@@ -215,9 +216,24 @@ struct	s_light
 	double		bright_ratio;
 };
 
-struct	
+struct	s_phong
+{
+	t_color3	ambient;
+	t_color3	diffuse;
+	t_color3	specular;
+	t_vec3		light_dir;
+	double		light_len;
+	t_ray		light_ray;
+	t_vec3		view_dir;
+	t_vec3		reflect_dir;
+	double		kd;
+	double		ks;
+	double		ksn;
+	double		spec;
+	double		brightness;
+};
 
-struct  s_vars
+struct	s_vars
 {
 	void		*mlx;
 	void		*win;

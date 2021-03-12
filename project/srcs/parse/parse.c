@@ -25,15 +25,15 @@ static int	handle_info(char **info, t_scene *scene)
 	else if (!(ft_strcmp(info[0], "l")))
 		return (info_l(info, scene));
 	else if (!(ft_strcmp(info[0], "sp")))
-		return (info_sp(info, scene, &scene->world));
+		return (info_sp(info, scene));
 	else if (!(ft_strcmp(info[0], "pl")))
-		return (info_pl(info, scene, &scene->world));
+		return (info_pl(info, scene));
 	else if (!(ft_strcmp(info[0], "sq")))
-		return (info_sq(info, scene, &scene->world));
+		return (info_sq(info, scene));
 	else if (!(ft_strcmp(info[0], "cy")))
-		return (info_cy(info, scene, &scene->world));
+		return (info_cy(info, scene));
 	else if (!(ft_strcmp(info[0], "tr")))
-		return (info_tr(info, scene, &scene->world));
+		return (info_tr(info, scene));
 	else
 		return (1);
 }

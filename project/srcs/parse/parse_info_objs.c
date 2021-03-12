@@ -1,6 +1,6 @@
 #include "minirt.h"
 
-int	info_sp(char **info, t_scene *scene, t_object **world)
+int	info_sp(char **info, t_scene *scene)
 {
 	t_point3	center;
 	double		diameter;
@@ -21,11 +21,11 @@ int	info_sp(char **info, t_scene *scene, t_object **world)
 	if (!check_color(color))
 		return (0);
 	color = vdivide(color, 255.0);
-	oadd(world, object(SP, sphere(center, diameter), color));
+	oadd(&scene->world, object(SP, sphere(center, diameter), color));
 	return (1);
 }
 
-int	info_pl(char **info, t_scene *scene, t_object **world)
+int	info_pl(char **info, t_scene *scene)
 {
 	t_point3	center;
 	t_vec3		normal;
@@ -49,11 +49,11 @@ int	info_pl(char **info, t_scene *scene, t_object **world)
 	if (!check_color(color))
 		return (0);
 	color = vdivide(color, 255.0);
-	oadd(world, object(PL, plane(center, normal), color));
+	oadd(&scene->world, object(PL, plane(center, normal), color));
 	return (1);
 }
 
-int	info_sq(char **info, t_scene *scene, t_object **world)
+int	info_sq(char **info, t_scene *scene)
 {
 	t_point3	center;
 	t_vec3		normal;
@@ -76,11 +76,11 @@ int	info_sq(char **info, t_scene *scene, t_object **world)
 	if (!check_color(color))
 		return (0);
 	color = vdivide(color, 255.0);
-	oadd(world, object(SQ, square(center, normal, length), color));
+	oadd(&scene->world, object(SQ, square(center, normal, length), color));
 	return (1);
 }
 
-int	info_cy(char **info, t_scene *scene, t_object **world)
+int	info_cy(char **info, t_scene *scene)
 {
 	t_point3	center;
 	t_vec3		normal;
@@ -104,12 +104,12 @@ int	info_cy(char **info, t_scene *scene, t_object **world)
 	if (!check_color(color))
 		return (0);
 	color = vdivide(color, 255.0);
-	oadd(world, object(CY, cylinder(center, normal, ft_atod(info[3]),
-					ft_atod(info[4])), color));
+	oadd(&scene->world, object(CY, cylinder(center, normal,
+					ft_atod(info[3]), ft_atod(info[4])), color));
 	return (1);
 }
 
-int	info_tr(char **info, t_scene *scene, t_object **world)
+int	info_tr(char **info, t_scene *scene)
 {
 	t_point3	a;
 	t_point3	b;
@@ -134,6 +134,6 @@ int	info_tr(char **info, t_scene *scene, t_object **world)
 	if (!check_color(color))
 		return (0);
 	color = vdivide(color, 255.0);
-	oadd(world, object(TR, triangle(a, b, c), color));
+	oadd(&scene->world, object(TR, triangle(a, b, c), color));
 	return (1);
 }

@@ -35,35 +35,25 @@ t_bool		in_shadow(t_object *objs, t_ray light_ray, double light_len)
 
 t_color3	point_light_get(t_scene *scene, t_light *light)
 {
-	t_color3	ambient;
-	t_color3	diffuse;
-	t_color3	specular;
-	t_vec3		light_dir;
-	double		light_len;
-	t_ray		light_ray;
-	t_vec3		view_dir;
-	t_vec3		reflect_dir;
-	double		kd;
-	double		ks;
-	double		ksn;
-	double		spec;
-	double		brightness;
+	t_phong	p;
 
-	light_dir = vminus(light->origin, scene->rec.p);
-	light_len = vlength(light_dir);
-	light_ray = ray(vplus(scene->rec.p, vmult(scene->rec.normal, EPSILON)), light_dir);
-	if (in_shadow(scene->world, light_ray, light_len))
+	p.light_dir = vminus(light->origin, scene->rec.p);
+	p.light_len = vlength(p.light_dir);
+	p.light_ray = ray(vplus(scene->rec.p, vmult(scene->rec.normal, EPSILON)),
+			p.light_dir);
+	if (in_shadow(scene->world, p.light_ray, p.light_len))
 		return (color3(0, 0, 0));
-	light_dir = vunit(light_dir);
-	view_dir = vunit(vmult(scene->ray.dir, -1));
-	reflect_dir = reflect(vmult(light_dir, -1), scene->rec.normal);
-	kd = fmax(vdot(scene->rec.normal, light_dir), 0.0);
-	ks = 0.5;
-	ksn = 64;
-	ambient = vmult(scene->ambient.ambient_color, scene->ambient.ratio);
-	diffuse = vmult(light->light_color, kd);
-	spec = pow(fmax(vdot(view_dir, reflect_dir), 0.0), ksn);
-	specular = vmult(vmult(light->light_color, ks), spec);
-	brightness = light->bright_ratio * LUMEN;
-	return (vmult(vplus(vplus(ambient, diffuse), specular), brightness));
+	p.light_dir = vunit(p.light_dir);
+	p.view_dir = vunit(vmult(scene->ray.dir, -1));
+	p.reflect_dir = reflect(vmult(p.light_dir, -1), scene->rec.normal);
+	p.kd = fmax(vdot(scene->rec.normal, p.light_dir), 0.0);
+	p.ks = 0.5;
+	p.ksn = 64;
+	p.ambient = vmult(scene->ambient.ambient_color, scene->ambient.ratio);
+	p.diffuse = vmult(light->light_color, p.kd);
+	p.spec = pow(fmax(vdot(p.view_dir, p.reflect_dir), 0.0), p.ksn);
+	p.specular = vmult(vmult(light->light_color, p.ks), p.spec);
+	p.brightness = light->bright_ratio * LUMEN;
+	return (vmult(vplus(vplus(p.ambient, p.diffuse), p.specular),
+				p.brightness));
 }

@@ -1,7 +1,7 @@
 NAME = miniRT
 
 CC = gcc
-# CFLAGS = -g3 -fsanitize=address #-Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror
 AR = ar
 ARFLAGS = rc
 
@@ -36,6 +36,7 @@ SRCS = ./srcs/main.c 						\
 	   ./srcs/trace/trans/rotate.c			\
 	   ./srcs/trace/trans/scale.c			\
 	   ./srcs/trace/trans/translate.c		\
+	   ./srcs/trace/trans/trans_utils.c		\
 	   ./srcs/bitmap/bitmap.c				\
 	   ./srcs/panel/print_panel.c			\
 	   ./srcs/panel/object_panel.c			\
@@ -45,7 +46,12 @@ SRCS = ./srcs/main.c 						\
 	   ./srcs/panel/axis_panel.c			\
 	   ./srcs/panel/line_utils.c			\
 	   ./srcs/utils/object_utils.c			\
-	   ./srcs/utils/vec3_utils.c
+	   ./srcs/utils/vec3_utils.c			\
+	   ./srcs/utils/vec3_utils2.c			\
+	   ./srcs/utils/constructors.c			\
+	   ./srcs/utils/vec3_plus_minus.c		\
+	   ./srcs/utils/vec3_mult_div.c			
+
 SRCS_DIR = ./srcs					\
 		   ./srcs/gnl				\
 		   ./srcs/mlx_cntl			\

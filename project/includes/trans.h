@@ -14,7 +14,8 @@
 # define TRANS_H
 
 void		translate(t_object *obj, int axis, int sign);
-t_point3	translate_center(t_point3 center, int axis, int sign);
+void		translate_tr_plus(t_triangle *tr, int axis);
+void		translate_tr_minus(t_triangle *tr, int axis);
 void		scale(t_object *obj, int sign);
 void		rotate(t_object *obj, int axis, int sign);
 

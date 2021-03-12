@@ -3,8 +3,6 @@
 
 # define KEYPRESS 2
 # define KEYRELEASE 3
-# define KEYPRESSMASK (1L<<0)
-# define KEYRELEASEMASK (1L<<1)
 
 # define KEY_ESCAPE			53
 

@@ -23,7 +23,7 @@ t_bool	hit_triangle(t_object *tr_obj, t_ray *ray, t_hit_record *rec)
 		return (FALSE);
 	rec->t = tr->root;
 	rec->p = tr->p;
-	rec->normal = vunit(normal);
+	rec->normal = vunit(tr->n);
 	set_face_normal(ray, rec);
 	rec->albedo = tr_obj->albedo;
 	return (TRUE);
